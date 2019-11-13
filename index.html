@@ -222,7 +222,8 @@ $ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}</code></pr
 <li>Corre una única replica de <strong>Deployment</strong> y usa un <strong>Service</strong> para estar disponible desde el cluster</li>
 <li>Puede ser accedido usando <code>$ kubectl proxy</code></li>
 <li>No siempre se instala</li>
-</ul></section><section id="recursos-básicos-de-kubernetes-objectos-del-api" class="title-slide slide level2"><h2>Recursos básicos de Kubernetes / Objectos del API</h2></section><section id="namespaces" class="title-slide slide level3"><h3>Namespaces</h3><ul>
+</ul></section></section>
+<section><section id="recursos-básicos-de-kubernetes-objectos-del-api" class="title-slide slide level1"><h1>Recursos básicos de Kubernetes / Objectos del API</h1></section><section id="recursos" class="title-slide slide level2"><h2>Recursos</h2></section><section id="namespaces" class="title-slide slide level3"><h3>Namespaces</h3><ul>
 <li>Organiza objetos en el cluster (como carpetas)
 <ul>
 <li>si no se configura <strong>kubectl</strong> este interactúa por defecto con el namespace <strong>defaut</strong></li>
@@ -251,26 +252,7 @@ $ kubectl config use-context my-context</code></pre>
 <li>eksctl</li>
 </ul></li>
 </ul></li>
-</ul></section><section id="otros-recursos-importantes" class="title-slide slide level3"><h3>Otros recursos importantes</h3></section><section id="services" class="slide level4">
-<h4>Services</h4>
-</section><section id="pods" class="slide level4">
-<h4>Pods</h4>
-</section><section id="ingress" class="slide level4">
-<h4>Ingress</h4>
-</section><section id="replicasets" class="slide level4">
-<h4>ReplicaSets</h4>
-</section><section id="deployments" class="slide level4">
-<h4>Deployments</h4>
-</section><section id="daemonsets" class="slide level4">
-<h4>DaemonSets</h4>
-</section><section id="jobs" class="slide level4">
-<h4>Jobs</h4>
-</section><section id="configmaps" class="slide level4">
-<h4>ConfigMaps</h4>
-</section><section id="secrets" class="slide level4">
-<h4>Secrets</h4>
-<p><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></p>
-</section><section id="interactuando-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuando con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
+</ul></section><section id="services" class="title-slide slide level3"><h3>Services</h3></section><section id="pods" class="title-slide slide level3"><h3>Pods</h3></section><section id="ingress" class="title-slide slide level3"><h3>Ingress</h3></section><section id="replicasets" class="title-slide slide level3"><h3>ReplicaSets</h3></section><section id="deployments" class="title-slide slide level3"><h3>Deployments</h3></section><section id="daemonsets" class="title-slide slide level3"><h3>DaemonSets</h3></section><section id="jobs" class="title-slide slide level3"><h3>Jobs</h3></section><section id="configmaps" class="title-slide slide level3"><h3>ConfigMaps</h3></section><section id="secrets" class="title-slide slide level3"><h3>Secrets</h3><p><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></p></section><section id="interactuando-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuando con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
 $ kubectl describe &lt;resource-name&gt; &lt;obj-name&gt;</code></pre></section><section id="crear-actualizar-y-destruir-objetos-de-k8s" class="title-slide slide level3"><h3>Crear, Actualizar y Destruir Objetos de K8s</h3><pre class="bash"><code>$ kubectl apply -f obj.yaml
 $ vi obj.yaml # update some resources
 $ kubectl apply --dry-run -f obj.yaml # output the changes without making them
@@ -345,7 +327,7 @@ $ kubectl help | less</code></pre></section></section>
 </ul></section></section>
 <section><section id="bibliografía-y-recursos" class="title-slide slide level1"><h1>Bibliografía y Recursos</h1></section><section id="bibliografía" class="title-slide slide level2"><h2>Bibliografía</h2><ul>
 <li><em>Kubernetes: Up and running</em>, 2nd edition, by Brendan Burns, Joe Beda and Kelsey Hightower (O’Reilly).</li>
-</ul></section><section id="recursos" class="title-slide slide level2"><h2>Recursos</h2><ul>
+</ul></section><section id="recursos-1" class="title-slide slide level2"><h2>Recursos</h2><ul>
 <li><a href="https://kubernetes.io/docs/reference/">Kubernetes API Reference Documentation</a></li>
 <li><a href="https://www.youtube.com/watch?v=4ht22ReBjno">The Illustrated Children’s Guide to Kubernetes</a></li>
 <li><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></li>

@@ -252,7 +252,9 @@ Los siguientes componentes corren en el namespace **kube-system**.
 - Puede ser accedido usando `$ kubectl proxy`
 - No siempre se instala
 
-## Recursos básicos de Kubernetes / Objectos del API
+# Recursos básicos de Kubernetes / Objectos del API
+
+## Recursos
 
 ### Namespaces
 
@@ -289,25 +291,23 @@ $ kubectl --all-namespaces get pods
     - az
     - eksctl
 
-### Otros recursos importantes
+### Services
 
-#### Services
+### Pods
 
-#### Pods
+### Ingress
 
-#### Ingress
+### ReplicaSets
 
-#### ReplicaSets
+### Deployments
 
-#### Deployments
+### DaemonSets
 
-#### DaemonSets
+### Jobs
 
-#### Jobs
+### ConfigMaps
 
-#### ConfigMaps
-
-#### Secrets
+### Secrets
 
 [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
 
