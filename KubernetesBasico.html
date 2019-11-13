@@ -129,7 +129,7 @@ $ az aks get-credentials --resource-group=s4n --name=s4n-cluster</code></pre>
 <pre class="bash"><code>$ doctl kubernetes cluster list
 $ doctl kubernetes cluster kubeconfig save s4n
 $ kubectl get nodes</code></pre>
-</section><section id="localmente" class="title-slide slide level3"><h3>Localmente</h3></section><section id="minikube" class="slide level4">
+</section><section id="máquina-local" class="title-slide slide level3"><h3>Máquina local</h3></section><section id="minikube" class="slide level4">
 <h4>minikube</h4>
 <p>Asegúrese de instalar un hypervisor como <strong>virtualbox</strong> o <strong>kvm</strong>.</p>
 <pre class="bash"><code>$ minikube start
@@ -142,7 +142,7 @@ $ minikube delete</code></pre>
 $ export KUBECONFIG=&quot;$(kind get kubeconfig-path)&quot;
 $ kubectl cluster-info
 $ kind delete cluster</code></pre>
-</section><section id="iot---arm---raspberry" class="title-slide slide level3"><h3>IoT - ARM - Raspberry</h3></section><section id="k3s-de-rancher" class="slide level4">
+</section><section id="máquinas-on-premise" class="title-slide slide level3"><h3>Máquinas on premise</h3></section><section id="k3s-de-rancher" class="slide level4">
 <h4>k3s de Rancher</h4>
 <pre class="bash"><code># On Server
 $ curl -sfL https://get.k3s.io | sh -
@@ -155,6 +155,13 @@ $ curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=XXX sh 
 # On a different node run the below. NODE_TOKEN comes from 
 # /var/lib/rancher/k3s/server/node-token on your server
 $ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}</code></pre>
+</section><section id="ansible" class="slide level4">
+<h4>Ansible</h4>
+<ul>
+<li><a href="https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/">Kubernetes setup using ansible and vagrant</a></li>
+<li><a href="https://galaxy.ansible.com/geerlingguy/kubernetes">Ansible Galaxy</a></li>
+<li><a href="https://github.com/openshift/openshift-ansible">Openshift</a></li>
+</ul>
 </section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2></section><section id="versiones" class="title-slide slide level3"><h3>Versiones</h3><pre class="bash"><code>$ kubectl version</code></pre>
 <ul>
 <li>Mantenerse entre dos versiones menores de distancia</li>
@@ -288,7 +295,7 @@ $ kubectl port-forward &lt;pod-name&gt; 8080:80</code></pre>
 </ul></li>
 </ul></section><section id="kubectl-help" class="title-slide slide level3"><h3>kubectl help</h3><pre class="bash"><code>$ kubectl help
 $ kubectl help | grep kubeconfig
-$ kubectl help | less</code></pre></section><section id="cloud-native-groups" class="title-slide slide level2"><h2>Cloud Native Groups</h2></section><section id="cncf" class="title-slide slide level3"><h3>CNCF</h3></section><section id="cdf" class="title-slide slide level3"><h3>CDF</h3></section></section>
+$ kubectl help | less</code></pre></section></section>
 <section><section id="siguientes-pasos" class="title-slide slide level1"><h1>Siguientes Pasos</h1></section><section id="role-based-access-control-rbac" class="title-slide slide level2"><h2>Role Based Access Control (RBAC)</h2><ul>
 <li>acceso granular al API de K8s para usuarios y <strong>service accounts</strong></li>
 </ul></section><section id="k8s-storage-solutions" class="title-slide slide level2"><h2>K8s Storage Solutions</h2><ul>
@@ -332,6 +339,9 @@ $ kubectl help | less</code></pre></section><section id="cloud-native-groups" cl
 </ul></section><section id="managing-secrets-and-configurations" class="title-slide slide level2"><h2>Managing Secrets and Configurations</h2><ul>
 <li>consul integration</li>
 <li>vault integration</li>
+</ul></section><section id="cloud-native-groups" class="title-slide slide level2"><h2>Cloud Native Groups</h2><ul>
+<li><p>CNCF</p></li>
+<li><p>CDF</p></li>
 </ul></section></section>
 <section><section id="bibliografía-y-recursos" class="title-slide slide level1"><h1>Bibliografía y Recursos</h1></section><section id="bibliografía" class="title-slide slide level2"><h2>Bibliografía</h2><ul>
 <li><em>Kubernetes: Up and running</em>, 2nd edition, by Brendan Burns, Joe Beda and Kelsey Hightower (O’Reilly).</li>

@@ -130,7 +130,7 @@ $ doctl kubernetes cluster kubeconfig save s4n
 $ kubectl get nodes
 ```
 
-### Localmente
+### Máquina local
 
 #### minikube
 
@@ -153,7 +153,7 @@ $ kubectl cluster-info
 $ kind delete cluster
 ```
 
-### IoT - ARM - Raspberry
+### Máquinas on premise
 
 #### k3s de Rancher
 
@@ -170,6 +170,12 @@ $ curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=XXX sh 
 # /var/lib/rancher/k3s/server/node-token on your server
 $ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}
 ```
+
+#### Ansible
+
+- [Kubernetes setup using ansible and vagrant](https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/)
+- [Ansible Galaxy](https://galaxy.ansible.com/geerlingguy/kubernetes)
+- [Openshift](https://github.com/openshift/openshift-ansible)
 
 ## Cliente de Kubernetes
 
@@ -362,12 +368,6 @@ $ kubectl help | grep kubeconfig
 $ kubectl help | less
 ```
 
-## Cloud Native Groups
-
-### CNCF
-
-### CDF
-
 # Siguientes Pasos
 
 ## Role Based Access Control (RBAC)
@@ -428,6 +428,12 @@ $ kubectl help | less
 
 - consul integration
 - vault integration
+
+## Cloud Native Groups
+
+- CNCF
+
+- CDF
 
 # Bibliografía y Recursos
 
