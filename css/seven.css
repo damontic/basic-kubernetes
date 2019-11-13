@@ -2,6 +2,14 @@
     background-color: #ECE9F1;
 }
 
+.reveal pre code {
+	display: -webkit-inline-box;
+}
+
+.reveal pre {
+	display: contents;
+}
+
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
 	color: rgb(85, 85, 85);
 	font-family: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
