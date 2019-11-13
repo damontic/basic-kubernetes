@@ -3,8 +3,6 @@ title: Kubernetes Basics
 author: David Alberto Montaño Fetecua
 ---
 
-![Dilbert knows Kubernetes](images/dilbert.png)
-
 # Aplicaciones Distribuidas
 
 ## Procesos
@@ -20,16 +18,28 @@ author: David Alberto Montaño Fetecua
 - Seguridad
 - Administración de la Configuración
 
+::: notes
+
+This is my note.
+
+- It can contain MArkdown
+- like this list
+
+:::
+
 ## Escenarios Diferentes
 
-- Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo (Windows Services, init.d, upstart, systemctl)
+- **Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo** (Windows Services, init.d, upstart, systemctl)
   - Máquinas Físicas
   - Máquinas Virtuales
-- Aplicaciones Containerizadas (estándar OCI, Docker, rkt, podman, buildah, containerd)
+- **Aplicaciones Containerizadas** (estándar OCI, Docker, rkt, podman, buildah, containerd)
 
 # Kubernetes
 
-- Sistema de código abierto para automatizar despliegue, escalabilidad y administración de aplicaciones containerizadas
+- ***Orquestrador de aplicaciones conteinerizadas***
+  - *código abierto*
+  - *automatizar despliegues*
+  - *escalabilidad*
 
 ## Beneficios
 
@@ -47,10 +57,13 @@ Alto número de features + mantener una alta disponibilidad de los servicios
   - desacoplando aplicaciones: load balancers for each
   - desacoplando equipos e infraestructura
   - desacoplando recursos de k8s: pods, namespaces, services, ingresses
+
+### Escalabilidad (software y equipo)
+
 - Separación de Intereses en cuanto a Consistencia y Escalabilidad
-  - Desarrollador de Aplicación depende de los Acuerdos de Nivel de Servicio
-  - El Ingeniero Fiabilidad del API de Orquestración de Contenedoresse enfoca en entregar unos Acuerdos de Nivel de Servicio sobre el API sin preocuparse de las aplicaciones que corren encima de esta.
-  - Los ingenieros de fiabilidad del Sistema Operativo se enfocan en los Acuerdos de Nivel de Servicio de los individuales sistemas operativos instalados en cada máquina.
+  - Desarrollador de Aplicación depende de los SLAs
+  - El Ingeniero Fiabilidad del API de Orquestración de Contenedoresse enfoca en entregar unos SLAs sobre el API sin preocuparse de las aplicaciones que corren encima de esta.
+  - Los ingenieros de fiabilidad del Sistema Operativo se enfocan en los SLAs de los individuales sistemas operativos instalados en cada máquina.
 
 ### Escalabilidad
 
@@ -75,6 +88,8 @@ style KA fill:#0BF
 style KE fill:#0BF
 style CPU fill:#0BF
 ```
+
+### Escalabilidad
 
 - KaaS
   - Tectonic + Openshit

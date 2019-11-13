@@ -6,5 +6,5 @@ To generate the slides you can use the pandoc md to slides alternatives.
 For example to generate the reveal.js slides execute:
 
 ```bash
-$ pandoc -s --mathjax -i -t revealjs Kubernetesbasics.md -o kubernetesbasics.html --slide-level 3
+$ pandoc -s -i -t revealjs KubernetesBasico.md -o kubernetesbasics.html --slide-level 4 --css css/seven.css
 ```

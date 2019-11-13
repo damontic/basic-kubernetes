@@ -1,0 +1,8 @@
+.slide-background {
+    background: url(images/logo_esquina_intro_end.svg) right bottom no-repeat, linear-gradient(to right, rgb(68, 53, 72), rgb(183, 25, 48), rgb(233, 70, 53));
+    display: block;
+}
+
+.sourceCode.bash {
+    background-color: #404040;
+}
