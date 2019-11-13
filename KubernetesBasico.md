@@ -13,7 +13,7 @@ author: David Alberto Montaño Fetecua
 
 # Contexto
 
-## Procesos
+## Procesos de DevOps
 
 - Despliegues
 - Rollbacks - Deshacer Despliegue
@@ -25,15 +25,6 @@ author: David Alberto Montaño Fetecua
 - Aprovisionamiento de Ambientes
 - Seguridad
 - Administración de la Configuración
-
-::: notes
-
-This is my note.
-
-- It can contain MArkdown
-- like this list
-
-:::
 
 ## Escenarios Diferentes
 
@@ -54,7 +45,14 @@ This is my note.
 
 ## Beneficios
 
-### Velocidad
+- velocidad
+- escalabilidad
+- abstracción de infraestructura
+- eficiencia
+
+::: notes
+
+Velocidad
 
 Alto número de features + mantener una alta disponibilidad de los servicios
 
@@ -62,37 +60,37 @@ Alto número de features + mantener una alta disponibilidad de los servicios
 - Configuración Declarativa
 - Sistemas de autocuración online
 
-### Escalabilidad (software y equipo)
+Escalabilidad (software y equipo)
 
 - Desacoplamiento de Arquitecturas
   - desacoplando aplicaciones: load balancers for each
   - desacoplando equipos e infraestructura
   - desacoplando recursos de k8s: pods, namespaces, services, ingresses
 
-### Escalabilidad (software y equipo)
-
 - Separación de Intereses en cuanto a Consistencia y Escalabilidad
   - Desarrollador de Aplicación depende de los SLAs
   - El Ingeniero Fiabilidad del API de Orquestración de Contenedores se enfoca en entregar unos SLAs sobre el API sin preocuparse de las aplicaciones que corren encima de esta.
   - Los ingenieros de fiabilidad del Sistema Operativo se enfocan en los SLAs de los individuales sistemas operativos instalados en cada máquina.
 
-### Escalabilidad
+Escalabilidad
 
 - KaaS
   - Tectonic + Openshit
   - Rancher
   - Digital Ocean
 
-### Abstracción de Infraestructura
+Abstracción de Infraestructura
 
 - Separar desarrolladores de las máquinas
 - Portabilidad
   - los mismos manifiestos funcionan en cualquier cluster de K8s
   - intentar evitar servicios de la nube que lo amarren a esta
 
-### Eficiencia
+Eficiencia
 
 - Facilita encontrar el número óptimo de nodos usado al mismo tiempo por varios equipos
+
+:::
 
 # Arquitectura de Kubernetes
 
