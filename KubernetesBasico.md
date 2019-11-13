@@ -3,6 +3,13 @@ title: Kubernetes Basics
 author: David Alberto Montaño Fetecua
 ---
 
+# Agenda
+
+- Aplicaciones Distribuidas
+- Kubernetes
+- Cloud Native Apps
+- ¿Qué aprender ahora?
+
 # Aplicaciones Distribuidas
 
 ## Procesos
