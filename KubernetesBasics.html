@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="David Alberto Montaño Fetecua">
+  <title>Kubernetes Basics</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reset.css">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="css/seven.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Kubernetes Basics</h1>
+  <p class="author">David Alberto Montaño Fetecua</p>
+</section>
+
+<section class="slide level4">
+
+<figure>
+<img data-src="images/dilbert.png" alt="" /><figcaption>Dilbert knows Kubernetes</figcaption>
+</figure>
+</section>
+<section><section id="distributed-applications" class="title-slide slide level1"><h1>Distributed Applications</h1></section><section id="processes" class="title-slide slide level2"><h2>Processes</h2><ul>
+<li class="fragment">Deployments</li>
+<li class="fragment">Rollbacks</li>
+<li class="fragment">Distributed State Management</li>
+<li class="fragment">Testing</li>
+<li class="fragment">Scaling</li>
+<li class="fragment">Monitoring</li>
+<li class="fragment">Self Healing Logic</li>
+<li class="fragment">Environment Provisioning</li>
+<li class="fragment">Security</li>
+<li class="fragment">Configuration Management</li>
+</ul></section><section id="different-scenarios" class="title-slide slide level2"><h2>Different scenarios</h2><ul>
+<li class="fragment">Microservices running as Services (Windows Services, init.d, upstart, systemctl)
+<ul>
+<li class="fragment">Physical Machines</li>
+<li class="fragment">Virtual Machines</li>
+</ul></li>
+<li class="fragment">Containerized applications (Docker)</li>
+</ul></section></section>
+<section><section id="kubernetes" class="title-slide slide level1"><h1>Kubernetes</h1><ul>
+<li class="fragment">Open Source Orchestrator for deploying containerized applications</li>
+</ul></section><section id="benefits" class="title-slide slide level2"><h2>Benefits</h2></section><section id="velocity" class="title-slide slide level3"><h3>Velocity</h3><p>High number of features + maintaining a highly available service.</p>
+<ul>
+<li class="fragment">Immutability</li>
+<li class="fragment">Declarative Configuration</li>
+<li class="fragment">Online self-healing systems</li>
+</ul></section><section id="scaling-software-and-teams" class="title-slide slide level3"><h3>Scaling (software and teams)</h3><ul>
+<li class="fragment">Decoupling Architectures
+<ul>
+<li class="fragment">decoupling applications: load balancers for each</li>
+<li class="fragment">decoupling teams and infrastructure</li>
+<li class="fragment">decoupling k8s resources: pods, namespaces, services, ingresses</li>
+</ul></li>
+<li class="fragment">Separation of Concerns for Consistency and Scaling
+<ul>
+<li class="fragment">Application Developer relies on Service Level Agreements.</li>
+<li class="fragment">Container Orchestration API Reliability Engineer focuses on delivering the orchestration API’s SLA without worrying about the applications that are running on top of it.</li>
+<li class="fragment">OS Reliability Engineers focus on the SLA of the individual machine’s OS.</li>
+</ul></li>
+</ul></section><section id="scaling" class="title-slide slide level3"><h3>Scaling</h3><pre class="mermaid"><code>graph TB
+A[Application Ops/SRE]
+KA[Kubernetes API]
+C[Cluster Ops/SRE]
+KE[Kernel SysCall API]
+K[Kernel Ops/SRE]
+CPU[&quot;CPU #40;x86, ARM, etc#41;&quot;]
+H[Hardware Ops/SRE]
+
+A --- KA
+KA --- C
+C --- KE
+KE --- K
+K --- CPU
+CPU --- H
+
+style KA fill:#0BF
+style KE fill:#0BF
+style CPU fill:#0BF</code></pre>
+<ul>
+<li class="fragment">KaaS</li>
+</ul></section><section id="infrastructure-abstraction" class="title-slide slide level3"><h3>Infrastructure abstraction</h3><ul>
+<li class="fragment">Separate developers from machines</li>
+<li class="fragment">Portability
+<ul>
+<li class="fragment">same manifests work on any K8s cluster</li>
+<li class="fragment">avoid cloud managed services</li>
+</ul></li>
+</ul></section><section id="efficiency" class="title-slide slide level3"><h3>Efficiency</h3><ul>
+<li class="fragment">Optimal number of nodes used at the same time for various teams</li>
+</ul></section><section id="deploying-a-cluster" class="title-slide slide level2"><h2>Deploying a Cluster</h2></section><section id="public-cloud-provider" class="title-slide slide level3"><h3>Public Cloud Provider</h3></section><section id="gcp" class="slide level4">
+<h4>GCP</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a>$ <span class="ex">gcloud</span> config set compute/zone us-west1-a</span>
+<span id="cb2-2"><a href="#cb2-2"></a>$ <span class="ex">gcloud</span> container clusters create s4n-cluster</span>
+<span id="cb2-3"><a href="#cb2-3"></a>$ <span class="ex">gcloud</span> auth application-default login</span></code></pre></div>
+</section><section id="azure" class="slide level4">
+<h4>Azure</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a>$ <span class="ex">az</span> group create --name=s4n --location=westus</span>
+<span id="cb3-2"><a href="#cb3-2"></a>$ <span class="ex">az</span> aks create --resource-group=s4n --name=s4n-cluster</span>
+<span id="cb3-3"><a href="#cb3-3"></a>$ <span class="ex">az</span> aks get-credentials --resource-group=s4n --name=s4n-cluster</span></code></pre></div>
+</section><section id="aws" class="slide level4">
+<h4>AWS</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a>$ <span class="ex">eksctl</span> create cluster --name s4n ...</span></code></pre></div>
+</section><section id="locally" class="title-slide slide level3"><h3>Locally</h3></section><section id="minikube" class="slide level4">
+<h4>minikube</h4>
+<p>Make sure you install an hypervisor such as <strong>virtualbox</strong> or <strong>kvm</strong>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a>$ <span class="ex">minikube</span> start</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a>$ <span class="ex">minikube</span> stop</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a>$ <span class="ex">minikube</span> delete</span></code></pre></div>
+</section><section id="kind" class="slide level4">
+<h4>kind</h4>
+<p>Kubernetes in Docker</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a>$ <span class="ex">kind</span> create cluster --wait 5min</span>
+<span id="cb8-2"><a href="#cb8-2"></a>$ <span class="bu">export</span> <span class="va">KUBECONFIG=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">kind</span> get kubeconfig-path<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>$ <span class="ex">kubectl</span> cluster-info</span>
+<span id="cb8-4"><a href="#cb8-4"></a>$ <span class="ex">kind</span> delete cluster</span></code></pre></div>
+</section><section id="kubernetes-client" class="title-slide slide level2"><h2>Kubernetes Client</h2></section><section id="versions" class="title-slide slide level3"><h3>Versions</h3><div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a>$ <span class="ex">kubectl</span> version</span></code></pre></div>
+<ul>
+<li class="fragment">Stay within two minor versions</li>
+<li class="fragment">Don’t try to use newer features on an older cluster</li>
+</ul></section><section id="component-statuses" class="title-slide slide level3"><h3>Component Statuses</h3><div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a>$ <span class="ex">kubectl</span> get componentstatuses</span></code></pre></div>
+<ul>
+<li class="fragment"><strong>controller manager</strong>: controllers regulate behavior of the cluster</li>
+<li class="fragment"><strong>scheduler</strong>: places different pods onto different nodes in the cluster</li>
+<li class="fragment"><strong>etcd</strong>: storage for the cluster where all API objects are stored</li>
+</ul></section><section id="worker-nodes" class="title-slide slide level3"><h3>Worker Nodes</h3><div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a>$ <span class="ex">kubectl</span> get nodes</span></code></pre></div>
+<ul>
+<li class="fragment"><strong>master nodes</strong>: where the core cluster containers run
+<ul>
+<li class="fragment">API server</li>
+<li class="fragment">Scheduler</li>
+</ul></li>
+<li class="fragment"><strong>worker nodes</strong>: where users containers run</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a>$ <span class="ex">kubectl</span> describe nodes node-1</span></code></pre></div>
+<ul>
+<li class="fragment">shows information about
+<ul>
+<li class="fragment">Node
+<ul>
+<li class="fragment">Os running</li>
+<li class="fragment">architecture</li>
+<li class="fragment">hostname</li>
+</ul></li>
+<li class="fragment">Operation
+<ul>
+<li class="fragment">Disk usage</li>
+<li class="fragment">Memory Usage</li>
+</ul></li>
+<li class="fragment">Capacity
+<ul>
+<li class="fragment">Total Memory</li>
+<li class="fragment">Total CPU</li>
+<li class="fragment">GPU info</li>
+<li class="fragment">Pods</li>
+</ul></li>
+<li class="fragment">Current running pods</li>
+</ul></li>
+</ul></section><section id="cluster-components" class="title-slide slide level2"><h2>Cluster Components</h2><p>The following components run in the <strong>kube-system</strong> namespace.</p></section><section id="kubernetes-proxy" class="title-slide slide level3"><h3>Kubernetes Proxy</h3><ul>
+<li class="fragment">Routes network traffic to load balanced services in the Kubernetes Cluster</li>
+<li class="fragment">Present on every node in the cluster
+<ul>
+<li class="fragment">Usually runs as a <strong>DaemonSet</strong></li>
+</ul></li>
+</ul></section><section id="kubernetes-dns" class="title-slide slide level3"><h3>Kubernetes DNS</h3><ul>
+<li class="fragment">Provides naming and discovery for the services that are defined in the cluster</li>
+<li class="fragment">Depending on the size of the cluster you may find one or more DNS servers running in your cluster
+<ul>
+<li class="fragment">Usually runs as a <strong>Deployment</strong></li>
+<li class="fragment">Uses a <strong>Service</strong> to do load balancing between the DNS server instances</li>
+</ul></li>
+<li class="fragment">You will find the <strong>Service</strong> ip in the <code>/etc/resolv.conf</code> file on each container running in the cluster</li>
+</ul></section><section id="kubernetes-ui" class="title-slide slide level3"><h3>Kubernetes UI</h3><ul>
+<li class="fragment">Runs as single replica <strong>Deployment</strong> and uses a <strong>Service</strong> to be available from the cluster</li>
+<li class="fragment">Can be accessed using <code>$ kubectl proxy</code></li>
+<li class="fragment">Not always installed</li>
+</ul></section><section id="basic-kubernetes-resources-api-objects" class="title-slide slide level2"><h2>Basic Kubernetes Resources / API Objects</h2></section><section id="namespaces" class="title-slide slide level3"><h3>Namespaces</h3><ul>
+<li class="fragment">Organize objects in the cluster (like a folder)
+<ul>
+<li class="fragment">a non configured <strong>kubectl</strong> interacts with the <strong>defaut</strong> namespace</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a>$ <span class="ex">kubectl</span> -n anothernamespace get pods</span>
+<span id="cb13-2"><a href="#cb13-2"></a>$ <span class="ex">kubectl</span> --all-namespaces get pods</span></code></pre></div></section><section id="contexts" class="title-slide slide level3"><h3>Contexts</h3><ul>
+<li class="fragment"><p>Each context is a different K8s cluster or K8s cluster namespace</p></li>
+<li class="fragment"><p>List of contexts and their configuration is stored in <code>$HOME/.kube/config</code> file</p></li>
+<li class="fragment"><p>You can list, create, update and delete the contexts in two ways:</p>
+<ul>
+<li class="fragment">by directly updating the <code>$HOME/.kube/config</code> file</li>
+<li class="fragment">by executing kubectl</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a>$ <span class="ex">kubectl</span> config set-context my-context --namespace=my-namespace</span>
+<span id="cb14-2"><a href="#cb14-2"></a>$ <span class="ex">kubectl</span> config use-context my-context</span></code></pre></div>
+<ul>
+<li class="fragment">some external commands update the <code>$HOME/.kube/config</code> file. BE AWARE of that!
+<ul>
+<li class="fragment">helm</li>
+<li class="fragment">ranchercli</li>
+<li class="fragment">gcloud</li>
+</ul></li>
+</ul></li>
+</ul></section><section id="services" class="title-slide slide level3"><h3>Services</h3></section><section id="pods" class="title-slide slide level3"><h3>Pods</h3></section><section id="ingress" class="title-slide slide level3"><h3>Ingress</h3></section><section id="replicasets" class="title-slide slide level3"><h3>ReplicaSets</h3></section><section id="deployments" class="title-slide slide level3"><h3>Deployments</h3></section><section id="daemonsets" class="title-slide slide level3"><h3>DaemonSets</h3></section><section id="jobs" class="title-slide slide level3"><h3>Jobs</h3></section><section id="configmaps" class="title-slide slide level3"><h3>ConfigMaps</h3></section><section id="secrets" class="title-slide slide level3"><h3>Secrets</h3></section><section id="interacting-with-kubernetes-api-objects" class="title-slide slide level2"><h2>Interacting with Kubernetes API Objects</h2></section><section id="describe-api-objects" class="title-slide slide level3"><h3>Describe API Objects</h3><div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a>$ <span class="ex">kubectl</span> get pods my-pod -o jsonpath --template=<span class="dt">{.status.podIP}</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>$ <span class="ex">kubectl</span> describe <span class="op">&lt;</span>resource-name<span class="op">&gt;</span> <span class="op">&lt;</span>obj-name<span class="op">&gt;</span></span></code></pre></div></section><section id="create-update-and-destroy-k8s-objects" class="title-slide slide level3"><h3>Create, Update and Destroy K8s Objects</h3><div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a>$ <span class="ex">kubectl</span> apply -f obj.yaml</span>
+<span id="cb16-2"><a href="#cb16-2"></a>$ <span class="ex">vi</span> obj.yaml <span class="co"># update some resources</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>$ <span class="ex">kubectl</span> apply --dry-run -f obj.yaml <span class="co"># output the changes without making them</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>$ <span class="ex">kubectl</span> apply -f obj.yaml</span>
+<span id="cb16-5"><a href="#cb16-5"></a>$ <span class="ex">kubectl</span> edit <span class="op">&lt;</span>resource-name<span class="op">&gt;</span> <span class="op">&lt;</span>obj-name<span class="op">&gt;</span> <span class="co"># after saving it is automatically updated</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>$ <span class="ex">kubectl</span> delete -f obj.yaml</span>
+<span id="cb16-7"><a href="#cb16-7"></a>$ <span class="ex">kubectl</span> delete <span class="op">&lt;</span>resource-name<span class="op">&gt;</span> <span class="op">&lt;</span>obj-name<span class="op">&gt;</span></span></code></pre></div></section><section id="labeling-and-annotating-objects" class="title-slide slide level3"><h3>Labeling and Annotating Objects</h3><div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a>$ <span class="ex">kubectl</span> label pods checkin project=airline</span>
+<span id="cb17-2"><a href="#cb17-2"></a>$ <span class="ex">kubectl</span> label pods checkin project=airline2 --overwrite</span>
+<span id="cb17-3"><a href="#cb17-3"></a>$ <span class="ex">kubectl</span> label pods checkin project- <span class="co"># delete the label</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a>$ <span class="ex">kubectl</span> annotate pods checkin project=airline</span>
+<span id="cb18-2"><a href="#cb18-2"></a>$ <span class="ex">kubectl</span> annotate pods checkin project=airline2 --overwrite</span>
+<span id="cb18-3"><a href="#cb18-3"></a>$ <span class="ex">kubectl</span> annotate pods checkin project- <span class="co"># delete the annotation</span></span></code></pre></div></section><section id="debugging-commands" class="title-slide slide level3"><h3>Debugging Commands</h3><div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a>$ <span class="ex">kubectl</span> top nodes</span>
+<span id="cb19-2"><a href="#cb19-2"></a>$ <span class="ex">kubectl</span> logs <span class="op">&lt;</span>pod-name<span class="op">&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>$ <span class="ex">kubectl</span> exec -ti exec <span class="op">&lt;</span>pod-name<span class="op">&gt;</span> -- bash</span>
+<span id="cb19-4"><a href="#cb19-4"></a>$ <span class="ex">kubectl</span> attach -it <span class="op">&lt;</span>pod-name<span class="op">&gt;</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>$ <span class="ex">kubectl</span> cp <span class="op">&lt;</span>pod-name<span class="op">&gt;</span>:<span class="op">&lt;</span>/path/to/remote/file<span class="op">&gt;</span> <span class="op">&lt;</span>/path/to/local/file<span class="op">&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>$ <span class="ex">kubectl</span> port-forward <span class="op">&lt;</span>pod-name<span class="op">&gt;</span> 8080:80</span></code></pre></div>
+<ul>
+<li class="fragment">Port forwarding can be done with services too.
+<ul>
+<li class="fragment">But the requests are forwarded to a single Pod in that service</li>
+</ul></li>
+</ul></section><section id="kubectl-help" class="title-slide slide level3"><h3>kubectl help</h3><div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a>$ <span class="ex">kubectl</span> help</span>
+<span id="cb20-2"><a href="#cb20-2"></a>$ <span class="ex">kubectl</span> help <span class="kw">|</span> <span class="fu">grep</span> kubeconfig</span>
+<span id="cb20-3"><a href="#cb20-3"></a>$ <span class="ex">kubectl</span> help <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div></section></section>
+<section><section id="cloud-native-groups" class="title-slide slide level1"><h1>Cloud Native Groups</h1></section><section id="cncf" class="title-slide slide level2"><h2>CNCF</h2></section><section id="cdf" class="title-slide slide level2"><h2>CDF</h2></section></section>
+<section><section id="advanced-k8s-topics" class="title-slide slide level1"><h1>Advanced K8s Topics</h1></section><section id="role-based-access-control-rbac" class="title-slide slide level2"><h2>Role Based Access Control (RBAC)</h2><ul>
+<li class="fragment">granular access to the K8s API for users and <strong>service accounts</strong></li>
+</ul></section><section id="k8s-storage-solutions" class="title-slide slide level2"><h2>K8s Storage Solutions</h2><ul>
+<li class="fragment">Best practices</li>
+<li class="fragment">StatefulSets</li>
+<li class="fragment">Ceph</li>
+</ul></section><section id="extending-kubernetes" class="title-slide slide level2"><h2>Extending Kubernetes</h2><ul>
+<li class="fragment">CRDs</li>
+<li class="fragment">CNI</li>
+<li class="fragment">plugins</li>
+</ul></section><section id="helm" class="title-slide slide level2"><h2>HELM</h2><ul>
+<li class="fragment">Why?</li>
+<li class="fragment">What?</li>
+<li class="fragment">Usage</li>
+</ul></section><section id="kubernetes-as-a-service" class="title-slide slide level2"><h2>Kubernetes as a Service</h2><ul>
+<li class="fragment">gcp</li>
+<li class="fragment">aws</li>
+<li class="fragment">azure</li>
+<li class="fragment">digital ocean</li>
+<li class="fragment">costs comparison</li>
+</ul></section><section id="kubernetes-ingresses-controllers" class="title-slide slide level2"><h2>Kubernetes Ingresses Controllers</h2><ul>
+<li class="fragment">Nginx</li>
+<li class="fragment">Kong</li>
+<li class="fragment">Ambassador (API Gateway based on Envoy)</li>
+<li class="fragment">Voyager (HaProxy)</li>
+<li class="fragment">AWS ALB Ingress controller</li>
+<li class="fragment">Contour (Envoy)</li>
+<li class="fragment">Citrix</li>
+<li class="fragment">F5</li>
+<li class="fragment">Gloo</li>
+<li class="fragment">HaProxy</li>
+<li class="fragment">Istio (Envoy)</li>
+<li class="fragment">Skipper</li>
+<li class="fragment">Traefik</li>
+</ul></section><section id="cd-pipelines" class="title-slide slide level2"><h2>CD Pipelines</h2><ul>
+<li class="fragment">Jenkins X</li>
+<li class="fragment">Spinnaker</li>
+<li class="fragment">Tekton</li>
+</ul></section></section>
+<section id="bibliography" class="title-slide slide level1"><h1>Bibliography</h1><ul>
+<li class="fragment"><em>Kubernetes: Up and running</em>, 2nd edition, by Brendan Burns, Joe Beda and Kelsey Hightower (O’Reilly).</li>
+<li class="fragment"><a href="https://kubernetes.io/docs/reference/">Kubernetes API Reference Documentation</a></li>
+</ul></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
