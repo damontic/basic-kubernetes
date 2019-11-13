@@ -7,10 +7,10 @@ For example to generate the reveal.js slides execute:
 
 In spanish:
 ```bash
-$ pandoc -s -t revealjs KubernetesBasico.md -o KubernetesBasico.html --slide-level 4 --variable revealjs-url="https://revealjs.com" --variable theme="white" --css css/seven.css
+$ pandoc -s -t revealjs KubernetesBasico.md -o KubernetesBasico.html --slide-level 4 --template=templates/template.html --variable revealjs-url="https://revealjs.com" --css css/seven.css
 ```
 
 In english:
 ```bash
-$ pandoc -s -i -t revealjs KubernetesBasics.md -o KubernetesBasics.html --slide-level 4 --variable revealjs-url="https://revealjs.com" --variable theme="white" --css css/seven.css
+$ pandoc -s -i -t revealjs KubernetesBasics.md -o KubernetesBasics.html --slide-level 4 --template=templates/template.html --variable revealjs-url="https://revealjs.com" --css css/seven.css
 ```

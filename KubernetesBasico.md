@@ -156,13 +156,7 @@ Asegúrese de instalar un hypervisor como **virtualbox** o **kvm**.
 
 ```bash
 $ minikube start
-```
-
-```bash
 $ minikube stop
-```
-
-```bash
 $ minikube delete
 ```
 
