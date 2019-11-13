@@ -362,13 +362,13 @@ $ kubectl help | grep kubeconfig
 $ kubectl help | less
 ```
 
-# Cloud Native Groups
+## Cloud Native Groups
 
-## CNCF
+### CNCF
 
-## CDF
+### CDF
 
-# ¿Qué aprender ahora?
+# Siguientes Pasos
 
 ## Role Based Access Control (RBAC)
 
@@ -429,12 +429,16 @@ $ kubectl help | less
 - consul integration
 - vault integration
 
-# Bibliography
+# Bibliografía y Recursos
+
+## Bibliografía
 
 - *Kubernetes: Up and running*, 2nd edition, by Brendan Burns, Joe Beda and Kelsey Hightower (O'Reilly).
+
+## Recursos
+
 - [Kubernetes API Reference Documentation](https://kubernetes.io/docs/reference/)
 - [The Illustrated Children's Guide to Kubernetes](https://www.youtube.com/watch?v=4ht22ReBjno)
 - [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
-
 - [CNCF: A Kubernetes story](https://www.cncf.io/phippy-goes-to-the-zoo-book/)
 
