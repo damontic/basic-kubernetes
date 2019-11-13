@@ -49,7 +49,7 @@ Alto número de features + mantener una alta disponibilidad de los servicios
 
 - Inmutabilidad
 - Configuración Declarativa
-- Systemas de autocuración online
+- Sistemas de autocuración online
 
 ### Escalabilidad (software y equipo)
 
@@ -62,7 +62,7 @@ Alto número de features + mantener una alta disponibilidad de los servicios
 
 - Separación de Intereses en cuanto a Consistencia y Escalabilidad
   - Desarrollador de Aplicación depende de los SLAs
-  - El Ingeniero Fiabilidad del API de Orquestración de Contenedoresse enfoca en entregar unos SLAs sobre el API sin preocuparse de las aplicaciones que corren encima de esta.
+  - El Ingeniero Fiabilidad del API de Orquestración de Contenedores se enfoca en entregar unos SLAs sobre el API sin preocuparse de las aplicaciones que corren encima de esta.
   - Los ingenieros de fiabilidad del Sistema Operativo se enfocan en los SLAs de los individuales sistemas operativos instalados en cada máquina.
 
 ### Escalabilidad
@@ -105,7 +105,7 @@ style CPU fill:#0BF
 
 ### Eficiencia
 
-- Facilita encontrar el número óptimo de nodos usado al mismo tiemp opor varios equipos
+- Facilita encontrar el número óptimo de nodos usado al mismo tiempo por varios equipos
 
 ## Desplegando un cluster
 
