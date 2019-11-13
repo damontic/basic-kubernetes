@@ -28,16 +28,26 @@ author: David Alberto Montaño Fetecua
 
 ## Escenarios Diferentes
 
+<img src="images/docker.svg" style="zoom:50%;" />
+
+<img src="images/rkt.svg" style="zoom:50%;" />
+
+::: notes
+
 - **Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo** (Windows Services, init.d, upstart, systemctl)
   - Máquinas Físicas
   - Máquinas Virtuales
-- **Aplicaciones Containerizadas** (estándar OCI, Docker, rkt, podman, buildah, containerd)
+- **Aplicaciones Containerizadas** (estándar OCI, docker, rkt, podman, buildah, containerd)
+
+:::
 
 # ¿Qué es Kubernetes?
 
 ## Kubernetes
 
-- ***Orquestrador de aplicaciones conteinerizadas***
+<img src="images/kubernetes.svg" style="zoom:50%;" />
+
+- ***Orquestrador de aplicaciones "containerizadas"***
   - *código abierto*
   - *automatiza procesos de despliegue*
   - *automatiza procesos de escalabilidad*
