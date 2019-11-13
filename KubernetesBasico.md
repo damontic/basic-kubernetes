@@ -277,7 +277,7 @@ $ kubectl --all-namespaces get pods
 
 ### Contexts
 
-- Cada contexto es u ncluster de K8s diferente o un namespace de un cluster diferente
+- Cada contexto es un cluster de K8s diferente o un namespace de un cluster diferente
 
 - La lista de contextos y su configuración se guarda en el archivo `$HOME/.kube/config`
 
