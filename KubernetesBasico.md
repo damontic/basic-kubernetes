@@ -5,12 +5,13 @@ author: David Alberto Montaño Fetecua
 
 # Agenda
 
-- Aplicaciones Distribuidas
-- Kubernetes
-- Cloud Native Apps
-- ¿Qué aprender ahora?
+- Contexto
+- ¿Qué es Kubernetes?
+- Arquitectura de Kubernetes
+- Recursos Básicos de Kubernetes
+- Siguientes Pasos
 
-# Aplicaciones Distribuidas
+# Contexto
 
 ## Procesos
 
@@ -41,12 +42,15 @@ This is my note.
   - Máquinas Virtuales
 - **Aplicaciones Containerizadas** (estándar OCI, Docker, rkt, podman, buildah, containerd)
 
-# Kubernetes
+# ¿Qué es Kubernetes?
+
+## Kubernetes
 
 - ***Orquestrador de aplicaciones conteinerizadas***
   - *código abierto*
-  - *automatizar despliegues*
-  - *escalabilidad*
+  - *automatiza procesos de despliegue*
+  - *automatiza procesos de escalabilidad*
+  - *facilita instalación y monitoreo de aplicaciones distribuidas*
 
 ## Beneficios
 
@@ -74,30 +78,6 @@ Alto número de features + mantener una alta disponibilidad de los servicios
 
 ### Escalabilidad
 
-```mermaid
-graph TB
-A[Application Ops/SRE]
-KA[Kubernetes API]
-C[Cluster Ops/SRE]
-KE[Kernel SysCall API]
-K[Kernel Ops/SRE]
-CPU["CPU #40;x86, ARM, etc#41;"]
-H[Hardware Ops/SRE]
-
-A --- KA
-KA --- C
-C --- KE
-KE --- K
-K --- CPU
-CPU --- H
-
-style KA fill:#0BF
-style KE fill:#0BF
-style CPU fill:#0BF
-```
-
-### Escalabilidad
-
 - KaaS
   - Tectonic + Openshit
   - Rancher
@@ -113,6 +93,8 @@ style CPU fill:#0BF
 ### Eficiencia
 
 - Facilita encontrar el número óptimo de nodos usado al mismo tiempo por varios equipos
+
+# Arquitectura de Kubernetes
 
 ## Desplegando un cluster
 
@@ -452,5 +434,7 @@ $ kubectl help | less
 - *Kubernetes: Up and running*, 2nd edition, by Brendan Burns, Joe Beda and Kelsey Hightower (O'Reilly).
 - [Kubernetes API Reference Documentation](https://kubernetes.io/docs/reference/)
 - [The Illustrated Children's Guide to Kubernetes](https://www.youtube.com/watch?v=4ht22ReBjno)
-
 - [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
+
+- [CNCF: A Kubernetes story](https://www.cncf.io/phippy-goes-to-the-zoo-book/)
+

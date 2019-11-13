@@ -23,6 +23,7 @@ $if(theme)$
 $else$
   <link rel="stylesheet" href="$revealjs-url$/css/theme/white.css" id="theme">
 $endif$
+  <link rel="stylesheet" href="$revealjs-url$/lib/css/monokai.css">
 $for(css)$
   <link rel="stylesheet" href="$css$"/>
 $endfor$
@@ -255,6 +256,7 @@ $endif$
         // Optional reveal.js plugins
         dependencies: [
           { src: '$revealjs-url$/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '$revealjs-url$/plugin/highlight/highlight.js', async: true },
           { src: '$revealjs-url$/plugin/zoom-js/zoom.js', async: true },
 $if(notes-server)$
           { src: '$revealjs-url$/socket.io/socket.io.js', async: true },
