@@ -8,7 +8,7 @@ author: David Alberto Montaño Fetecua
 - Contexto
 - ¿Qué es Kubernetes?
 - Arquitectura de Kubernetes
-- Recursos Básicos de Kubernetes
+- Algunos Recursos del API
 - Siguientes Pasos
 
 # Contexto
@@ -252,7 +252,7 @@ Los siguientes componentes corren en el namespace **kube-system**.
 - Puede ser accedido usando `$ kubectl proxy`
 - No siempre se instala
 
-# Recursos básicos de Kubernetes / Objectos del API
+# Algunos Recursos del API
 
 ## Recursos
 
