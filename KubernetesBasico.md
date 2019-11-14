@@ -559,6 +559,7 @@ $ kubectl config use-context my-context
 ### Describir Objetos del API
 
 ```bash
+$ kubectl get pods
 $ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
 $ kubectl describe <resource-name> <obj-name>
 ```

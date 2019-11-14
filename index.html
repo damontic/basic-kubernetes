@@ -461,7 +461,8 @@ $ kubectl config use-context my-context</code></pre>
 <li>az</li>
 <li>eksctl</li>
 </ul>
-</aside></section><section id="interactuar-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuar con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
+</aside></section><section id="interactuar-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuar con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods
+$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
 $ kubectl describe &lt;resource-name&gt; &lt;obj-name&gt;</code></pre></section><section id="crear-actualizar-y-destruir-objetos-de-k8s" class="title-slide slide level3"><h3>Crear, Actualizar y Destruir Objetos de K8s</h3><pre class="bash"><code>$ kubectl apply -f obj.yaml
 $ vi obj.yaml # update some resources
 $ kubectl apply --dry-run -f obj.yaml # output the changes without making them
