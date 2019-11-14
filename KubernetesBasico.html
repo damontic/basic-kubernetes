@@ -214,7 +214,7 @@
 <li>los pods en el cluster</li>
 </ul>
 <p>Con múltiples nodos maestros se consigue conmutación por error y alta disponibilidad del cluster.</p>
-</aside></section><section id="componentes-del-nodo-maestro" class="title-slide slide level2"><h2>Componentes del Nodo Maestro</h2><ul>
+</aside></section><section id="responsabilidades-del-nodo-maestro" class="title-slide slide level2"><h2>Responsabilidades del Nodo Maestro</h2><ul>
 <li>Decisiones globales del cluster</li>
 <li>Detectan y responden a eventos del cluster</li>
 <li>Sus componentes pueden arrancar en cualquier nodo</li>
@@ -227,7 +227,7 @@
 <li>impiden ejecución de pods de usuarios</li>
 </ul></li>
 </ul>
-</aside></section><section id="componentes-del-nodo-maestro-1" class="title-slide slide level2"><h2>Componentes del Nodo Maestro</h2><ul>
+</aside></section><section id="componentes-del-nodo-maestro" class="title-slide slide level2"><h2>Componentes del Nodo Maestro</h2><ul>
 <li>kube api server</li>
 <li>etcd</li>
 <li>kube scheduler</li>
@@ -412,50 +412,25 @@ $ kubectl describe nodes node-1</code></pre>
 </ul>
 <pre class="bash"><code>$ kubectl -n anothernamespace get pods
 $ kubectl --all-namespaces get pods</code></pre></section><section id="contexts" class="title-slide slide level2"><h2>Contexts</h2><ul>
-<li><p>Cada contexto es un cluster de K8s diferente o un namespace de un cluster diferente</p></li>
-<li><p>La lista de contextos y su configuración se guarda en el archivo <code>$HOME/.kube/config</code></p></li>
-<li><p>Se puede listar, crear, actualizar y borrarlos contextos de dos formas:</p>
-<ul>
-<li>actualizando el archivo <code>$HOME/.kube/config</code> directamente</li>
-<li>ejecutando kubectl</li>
+<li><p>Cluster o Namespace</p></li>
+<li><p><code>$HOME/.kube/config</code></p></li>
 </ul>
 <pre class="bash"><code>$ kubectl config set-context my-context --namespace=my-namespace
 $ kubectl config use-context my-context</code></pre>
 <ul>
 <li>algunos comandos externos actualizan el archivo <code>$HOME/.kube/config</code>. ¡SEA CONSCIENTE DE ELLO!</li>
 </ul>
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Command that updates kubectl config</th>
-<th>Command that updates kubectl config</th>
-<th>Command that updates kubectl config</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>helm</td>
-<td>ranchercli</td>
-<td>gcloud</td>
-</tr>
-<tr class="even">
-<td>doctl</td>
-<td>minikube</td>
-<td>az</td>
-</tr>
-<tr class="odd">
-<td>eksctl</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table></li>
-</ul></section><section id="interactuar-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuar con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
+<aside class="notes">
+<ul>
+<li>helm</li>
+<li>ranchercli</li>
+<li>gcloud</li>
+<li>doctl</li>
+<li>minikube</li>
+<li>az</li>
+<li>eksctl</li>
+</ul>
+</aside></section><section id="interactuar-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuar con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
 $ kubectl describe &lt;resource-name&gt; &lt;obj-name&gt;</code></pre></section><section id="crear-actualizar-y-destruir-objetos-de-k8s" class="title-slide slide level3"><h3>Crear, Actualizar y Destruir Objetos de K8s</h3><pre class="bash"><code>$ kubectl apply -f obj.yaml
 $ vi obj.yaml # update some resources
 $ kubectl apply --dry-run -f obj.yaml # output the changes without making them
@@ -498,44 +473,15 @@ $ kubectl help | less</code></pre></section></section>
 <li>tectonic + Open Shift</li>
 <li>rancher</li>
 <li>costs comparison</li>
-</ul></section><section id="kubernetes-ingresses-controllers" class="title-slide slide level2"><h2>Kubernetes Ingresses Controllers</h2><table>
-<thead>
-<tr class="header">
-<th>Ingress Controllers</th>
-<th>Ingress Controllers</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Nginx</td>
-<td>Kong</td>
-</tr>
-<tr class="even">
-<td>Ambassador (API Gateway based on Envoy)</td>
-<td>Voyager (HaProxy)</td>
-</tr>
-<tr class="odd">
-<td>AWS ALB Ingress controller</td>
-<td>Contour (Envoy)</td>
-</tr>
-<tr class="even">
-<td>Citrix</td>
-<td>F5</td>
-</tr>
-<tr class="odd">
-<td>Gloo</td>
-<td>HaProxy</td>
-</tr>
-<tr class="even">
-<td>Istio (Envoy)</td>
-<td>Skipper</td>
-</tr>
-<tr class="odd">
-<td>Traefik</td>
-<td></td>
-</tr>
-</tbody>
-</table></section><section id="cd-pipelines" class="title-slide slide level2"><h2>CD Pipelines</h2><ul>
+</ul></section><section id="kubernetes-ingresses-controllers" class="title-slide slide level2"><h2>Kubernetes Ingresses Controllers</h2><ul>
+<li>nginx</li>
+<li>kong</li>
+<li>gloo</li>
+<li>istio</li>
+<li>skipper</li>
+<li>traefik</li>
+<li>…</li>
+</ul></section><section id="cd-pipelines" class="title-slide slide level2"><h2>CD Pipelines</h2><ul>
 <li>Jenkins X</li>
 <li>Spinnaker</li>
 <li>Tekton</li>

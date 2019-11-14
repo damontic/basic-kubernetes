@@ -226,7 +226,7 @@ Con múltiples nodos maestros se consigue conmutación por error y alta disponib
 
 :::
 
-## Componentes del Nodo Maestro
+## Responsabilidades del Nodo Maestro
 
 - Decisiones globales del cluster
 - Detectan y responden a eventos del cluster
@@ -481,27 +481,29 @@ $ kubectl --all-namespaces get pods
 
 ## Contexts
 
-- Cada contexto es un cluster de K8s diferente o un namespace de un cluster diferente
+- Cluster o Namespace
 
-- La lista de contextos y su configuración se guarda en el archivo `$HOME/.kube/config`
+- `$HOME/.kube/config`
 
-- Se puede listar, crear, actualizar y borrarlos contextos de dos formas:
 
-  - actualizando el archivo `$HOME/.kube/config` directamente
-  - ejecutando kubectl
+```bash
+$ kubectl config set-context my-context --namespace=my-namespace
+$ kubectl config use-context my-context
+```
 
-  ```bash
-  $ kubectl config set-context my-context --namespace=my-namespace
-  $ kubectl config use-context my-context
-  ```
+- algunos comandos externos actualizan el archivo `$HOME/.kube/config`. ¡SEA CONSCIENTE DE ELLO!
 
-  - algunos comandos externos actualizan el archivo `$HOME/.kube/config`. ¡SEA CONSCIENTE DE ELLO!
+::: notes
 
-  | Command that updates kubectl config | Command that updates kubectl config | Command that updates kubectl config |
-  | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-  | helm                                | ranchercli                          | gcloud                              |
-  | doctl                               | minikube                            | az                                  |
-  | eksctl                              |                                     |                                     |
+- helm
+- ranchercli
+- gcloud
+- doctl
+- minikube
+- az
+- eksctl
+
+:::
 
 ## Interactuar con Objetos del API de Kubernetes
 
@@ -582,15 +584,13 @@ $ kubectl help | less
 
 ## Kubernetes Ingresses Controllers
 
-| Ingress Controllers                     | Ingress Controllers |
-| --------------------------------------- | ------------------- |
-| Nginx                                   | Kong                |
-| Ambassador (API Gateway based on Envoy) | Voyager (HaProxy)   |
-| AWS ALB Ingress controller              | Contour (Envoy)     |
-| Citrix                                  | F5                  |
-| Gloo                                    | HaProxy             |
-| Istio (Envoy)                           | Skipper             |
-| Traefik                                 |                     |
+- nginx
+- kong
+- gloo
+- istio
+- skipper
+- traefik
+- ...
 
 ## CD Pipelines
 
@@ -625,4 +625,3 @@ $ kubectl help | less
 - [Kubernetes.io](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
 - [OCI](https://www.opencontainers.org/)
 - [Bringing Pokemon GO to life on gcp](https://cloud.google.com/blog/products/gcp/bringing-pokemon-go-to-life-on-google-cloud)
-
