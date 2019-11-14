@@ -257,10 +257,9 @@
 <li>Service Account &amp; Token Controllers: crea cuentas por defecto y token de acceso al API para nuevos namespaces</li>
 </ul>
 <p><strong>cloud manager</strong></p>
-<p>runs controllers that interact with the underlying cloud providers. The cloud-controller-manager binary is an alpha feature introduced in Kubernetes release 1.6.</p>
-<p>cloud-controller-manager runs cloud-provider-specific controller loops only. You must disable these controller loops in the kube-controller-manager. You can disable the controller loops by setting the <code>--cloud-provider</code> flag to <code>external</code> when starting the kube-controller-manager.</p>
-<p>cloud-controller-manager allows the cloud vendor’s code and the Kubernetes code to evolve independently of each other. In prior releases, the core Kubernetes code was dependent upon cloud-provider-specific code for functionality. In future releases, code specific to cloud vendors should be maintained by the cloud vendor themselves, and linked to cloud-controller-manager while running Kubernetes.</p>
-<p>The following controllers have cloud provider dependencies:</p>
+<p>Ejecuta controladores que interactuan con proveedores de nube</p>
+<p>Binrio introducido en k8s 1.6</p>
+<p>Debe ser implementado por proveedores de nube y asociado al cloud manager al desplegar k8s</p>
 <ul>
 <li>Node Controller: revisa si nodo dejó de correr en nube específica</li>
 <li>Route Controller: configura rutas en la infraestructura de red subyacente</li>
@@ -270,7 +269,10 @@
 </aside></section><section id="componentes-de-los-nodos-trabajadores" class="title-slide slide level2"><h2>Componentes de los Nodos Trabajadores</h2><ul>
 <li>kubelet</li>
 <li>kube proxy</li>
-<li>container runtime</li>
+<li>container runtime
+<ul>
+<li><a href="http://www.docker.com/">Docker</a>, <a href="https://containerd.io/">containerd</a>, <a href="https://cri-o.io/">cri-o</a>, <a href="https://github.com/kubernetes-incubator/rktlet">rktlet</a>, frakti</li>
+</ul></li>
 </ul>
 <aside class="notes">
 <p><strong>kubelet</strong></p>

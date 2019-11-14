@@ -273,13 +273,11 @@ These controllers include:
 
 **cloud manager**
 
-runs controllers that interact with the underlying cloud providers. The cloud-controller-manager binary is an alpha feature introduced in Kubernetes release 1.6.
+Ejecuta controladores que interactuan con proveedores de nube
 
-cloud-controller-manager runs cloud-provider-specific controller loops only. You must disable these controller loops in the kube-controller-manager. You can disable the controller loops by setting the `--cloud-provider` flag to `external` when starting the kube-controller-manager.
+Binrio introducido en k8s 1.6
 
-cloud-controller-manager allows the cloud vendor’s code and the Kubernetes code to evolve independently of each other. In prior releases, the core Kubernetes code was dependent upon cloud-provider-specific code for functionality. In future releases, code specific to cloud vendors should be maintained by the cloud vendor themselves, and linked to cloud-controller-manager while running Kubernetes.
-
-The following controllers have cloud provider dependencies:
+Debe ser implementado por proveedores de nube y asociado al cloud manager al desplegar k8s
 
 - Node Controller: revisa si nodo dejó de correr en nube específica
 - Route Controller: configura rutas en la infraestructura de red subyacente
@@ -293,6 +291,7 @@ The following controllers have cloud provider dependencies:
 - kubelet
 - kube proxy
 - container runtime
+  - [Docker](http://www.docker.com/), [containerd](https://containerd.io/), [cri-o](https://cri-o.io/), [rktlet](https://github.com/kubernetes-incubator/rktlet), frakti
 
 ::: notes
 
