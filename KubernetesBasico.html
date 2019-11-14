@@ -221,7 +221,7 @@
 <li>los nodos trabajadores</li>
 <li>los pods en el cluster</li>
 </ul>
-<p>Con múltiples nodos amestros se consigue conmutación por error y alta disponibilidad del cluster.</p>
+<p>Con múltiples nodos maestros se consigue conmutación por error y alta disponibilidad del cluster.</p>
 </aside></section><section id="componentes-del-nodo-maestro" class="title-slide slide level2"><h2>Componentes del Nodo Maestro</h2><ul>
 <li>Decisiones globales del cluster</li>
 <li>Detectan y responden a eventos del cluster</li>
@@ -235,15 +235,49 @@
 <li>impiden ejecución de pods de usuarios</li>
 </ul></li>
 </ul>
-</aside></section><section id="kube-api-server" class="title-slide slide level3"><h3>kube API Server</h3></section><section id="etcd" class="title-slide slide level3"><h3>etcd</h3></section><section id="kube-scheduler" class="title-slide slide level3"><h3>kube-scheduler</h3></section><section id="kube-controller-manager" class="title-slide slide level3"><h3>kube controller manager</h3></section><section id="cloud-manager" class="title-slide slide level3"><h3>cloud manager</h3></section><section id="componentes-de-los-nodos-trabajadores" class="title-slide slide level2"><h2>Componentes de los Nodos Trabajadores</h2></section><section id="kubelet" class="title-slide slide level3"><h3>kubelet</h3></section><section id="kube-proxy" class="title-slide slide level3"><h3>kube proxy</h3><ul>
+</aside></section><section id="componentes-del-nodo-maestro-1" class="title-slide slide level2"><h2>Componentes del Nodo Maestro</h2><ul>
+<li>kube api server</li>
+<li>etcd</li>
+<li>kube scheduler</li>
+<li>kube controller manager</li>
+<li>cloud manager</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>kube api server</li>
+<li>etcd</li>
+<li>kube scheduler</li>
+<li>kube controller manager</li>
+<li>cloud manager</li>
+</ul>
+</aside></section><section id="componentes-de-los-nodos-trabajadores" class="title-slide slide level2"><h2>Componentes de los Nodos Trabajadores</h2><ul>
+<li>kubelet</li>
+<li>kube proxy</li>
+<li>container runtime</li>
+</ul>
+<aside class="notes">
+<p>kubelet</p>
+<p>kube proxy</p>
+<ul>
 <li>Enruta el tráfico de red hacia servicios con balanceadores de carga en el cluster</li>
 <li>Presente en cada nodo del cluster
 <ul>
 <li>Usualmente corre como un <strong>DaemonSet</strong></li>
 </ul></li>
-</ul></section><section id="container-runtime" class="title-slide slide level3"><h3>Container Runtime</h3><ul>
+</ul>
+<p>Container Runtime</p>
+<ul>
 <li>asd</li>
-</ul></section><section id="complementos" class="title-slide slide level2"><h2>Complementos</h2></section><section id="dns" class="title-slide slide level3"><h3>DNS</h3><ul>
+</ul>
+</aside></section><section id="componentes-adicionales" class="title-slide slide level2"><h2>Componentes adicionales</h2><ul>
+<li>DNS</li>
+<li>web ui</li>
+<li>container resource monitoring</li>
+<li>cluster level logging</li>
+</ul>
+<aside class="notes">
+<p>DNS</p>
+<ul>
 <li>Provee nombramiento y descubrimiento de los servicios definidos en el cluster</li>
 <li>Dependiendo del tamaño del cluster se pueden encontrar uno o más corriendo
 <ul>
@@ -251,11 +285,16 @@
 <li>Usa un <strong>Service</strong> para balancear la carga entre las instancias del servidor de DNS</li>
 </ul></li>
 <li>La ip del <strong>Service</strong> se encuentra en el archivo <code>/etc/resolv.conf</code> de cada contenedor que se ejecuta en el cluster</li>
-</ul></section><section id="web-ui" class="title-slide slide level3"><h3>Web UI</h3><ul>
+</ul>
+<p>Web UI</p>
+<ul>
 <li>Corre una única replica de <strong>Deployment</strong> y usa un <strong>Service</strong> para estar disponible desde el cluster</li>
 <li>Puede ser accedido usando <code>$ kubectl proxy</code></li>
 <li>No siempre se instala</li>
-</ul></section><section id="container-resource-monitoring" class="title-slide slide level3"><h3>Container Resource Monitoring</h3></section><section id="cluster-level-logging" class="title-slide slide level3"><h3>Cluster Level Logging</h3></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2><pre class="bash"><code>$ kubectl version
+</ul>
+<p>Container Resource Monitoring</p>
+<p>Cluster Level Logging</p>
+</aside></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2><pre class="bash"><code>$ kubectl version
 $ kubectl get componentstatuses</code></pre>
 <aside class="notes">
 <p>Versiones</p>

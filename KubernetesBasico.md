@@ -235,7 +235,7 @@ Los nodos maestro administran
 - los nodos trabajadores
 - los pods en el cluster
 
-Con múltiples nodos amestros se consigue conmutación por error y alta disponibilidad del cluster.
+Con múltiples nodos maestros se consigue conmutación por error y alta disponibilidad del cluster.
 
 :::
 
@@ -253,33 +253,56 @@ Con múltiples nodos amestros se consigue conmutación por error y alta disponib
 
 :::
 
-### kube API Server
+## Componentes del Nodo Maestro
 
-### etcd
+- kube api server
+- etcd
+- kube scheduler
+- kube controller manager
+- cloud manager
 
-### kube-scheduler
+::: notes
 
-### kube controller manager
+- kube api server
+- etcd
+- kube scheduler
+- kube controller manager
+- cloud manager
 
-### cloud manager
+:::
 
 ## Componentes de los Nodos Trabajadores
 
-### kubelet
+- kubelet
+- kube proxy
+- container runtime
 
-### kube proxy
+::: notes
+
+kubelet
+
+kube proxy
 
 - Enruta el tráfico de red hacia servicios con balanceadores de carga en el cluster
 - Presente en cada nodo del cluster
   - Usualmente corre como un **DaemonSet**
 
-### Container Runtime
+Container Runtime
 
 - asd
 
-## Complementos
+:::
 
-### DNS
+## Componentes adicionales
+
+- DNS
+- web ui
+- container resource monitoring
+- cluster level logging
+
+::: notes
+
+DNS
 
 - Provee nombramiento y descubrimiento de los servicios definidos en el cluster
 - Dependiendo del tamaño del cluster se pueden encontrar uno o más corriendo
@@ -287,15 +310,17 @@ Con múltiples nodos amestros se consigue conmutación por error y alta disponib
   - Usa un **Service** para balancear la carga entre las instancias del servidor de DNS
 - La ip del **Service** se encuentra en el archivo `/etc/resolv.conf` de cada contenedor que se ejecuta en el cluster
 
-### Web UI
+Web UI
 
 - Corre una única replica de **Deployment** y usa un **Service** para estar disponible desde el cluster
 - Puede ser accedido usando `$ kubectl proxy`
 - No siempre se instala
 
-### Container Resource Monitoring
+Container Resource Monitoring
 
-### Cluster Level Logging
+Cluster Level Logging
+
+:::
 
 ## Cliente de Kubernetes
 
