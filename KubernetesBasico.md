@@ -674,6 +674,7 @@ $ kubectl help | less
 ## Bibliografía
 
 - *Kubernetes: Up and running*, 2nd edition, by Brendan Burns, Joe Beda and Kelsey Hightower (O'Reilly).
+- [Kubernetes Podcast from Google](https://kubernetespodcast.com/)
 
 ## Recursos
 
