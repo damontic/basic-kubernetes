@@ -311,25 +311,45 @@ Cluster Level Logging
 
 # Algunos Recursos del API
 
-## Services
+---
 
-## Pods
+![](https://web.archive.org/web/20171108051103im_/https://deis.com/images/blog-images/kubernetes-illustrated-guide-diagram-5.png)
 
-## Ingress
+------
 
-## ReplicaSets
+![](https://www.cncf.io/wp-content/uploads/2018/12/phippy-goes-to-the-zoo-05.png)
 
-## Deployments
+------
 
-## DaemonSets
+![](https://www.cncf.io/wp-content/uploads/2018/12/phippy-goes-to-the-zoo-21.png)
 
-## Jobs
+---
 
-## ConfigMaps
+![](https://www.cncf.io/wp-content/uploads/2018/12/phippy-goes-to-the-zoo-11.png)
 
-## Secrets
+---
 
-[A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
+![](https://www.cncf.io/wp-content/uploads/2018/12/phippy-goes-to-the-zoo-13-1.png)
+
+---
+
+![](https://www.cncf.io/wp-content/uploads/2019/07/diagram8.png)
+
+---
+
+![](https://www.cncf.io/wp-content/uploads/2018/12/phippy-goes-to-the-zoo-15-1.png)
+
+---
+
+![](https://www.cncf.io/wp-content/uploads/2018/12/phippy-goes-to-the-zoo-09.png)
+
+---
+
+![](https://www.cncf.io/wp-content/uploads/2018/12/phippy-goes-to-the-zoo-17-1.png)
+
+---
+
+![](https://www.cncf.io/wp-content/uploads/2019/07/diagram9.png)
 
 # Algunos Comandos
 
@@ -601,6 +621,8 @@ $ kubectl help | less
 - [The Illustrated Children's Guide to Kubernetes](https://www.youtube.com/watch?v=4ht22ReBjno)
 - [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
 - [CNCF: A Kubernetes story](https://www.cncf.io/phippy-goes-to-the-zoo-book/)
+- [CNCF: The Illustrated Children's Guide to Kubernetes](https://www.cncf.io/the-childrens-illustrated-guide-to-kubernetes/)
 - [Kubernetes.io](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
 - [OCI](https://www.opencontainers.org/)
 - [Bringing Pokemon GO to life on gcp](https://cloud.google.com/blog/products/gcp/bringing-pokemon-go-to-life-on-google-cloud)
+
