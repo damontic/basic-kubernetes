@@ -21,6 +21,15 @@ author: David Alberto Montaño Fetecua
 - Conocer recursos más relevantes
 - Saber qué pasos seguir para empezar
 
+::: notes
+
+- Conocer un pocode k8s
+- Usar un poco kubernetes: minikube
+- Ser conscientes de que k8s no es para todas las aplicaciones
+  - microservicios que se comunican por APIs REST
+
+:::
+
 ## Procesos de DevOps
 
 - Despliegues
@@ -166,24 +175,25 @@ Eficiencia
 
 ## Cliente de Kubernetes
 
-### Versiones
-
 ```bash
 $ kubectl version
+$ kubectl get componentstatuses
 ```
+
+::: notes
+
+Versiones
 
 - Mantenerse entre dos versiones menores de distancia
 - No usar nuevas características en clusters viejos
 
-### Estados de los componentes
-
-```bash
-$ kubectl get componentstatuses
-```
+Estados de los componentes
 
 - **controller manager**: controladores regulan el comportamiento del cluster
 - **scheduler**: asocia diferentes pods en diferentes nodos del cluster
 - **etcd**: almacenamiento de todos los objetos del API
+
+:::
 
 ### Nodos Worker
 

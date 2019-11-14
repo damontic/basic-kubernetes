@@ -47,7 +47,17 @@
 <li>Conocer su arquitectura</li>
 <li>Conocer recursos más relevantes</li>
 <li>Saber qué pasos seguir para empezar</li>
-</ul></section><section id="procesos-de-devops" class="title-slide slide level2"><h2>Procesos de DevOps</h2><ul>
+</ul>
+<aside class="notes">
+<ul>
+<li>Conocer un pocode k8s</li>
+<li>Usar un poco kubernetes: minikube</li>
+<li>Ser conscientes de que k8s no es para todas las aplicaciones
+<ul>
+<li>microservicios que se comunican por APIs REST</li>
+</ul></li>
+</ul>
+</aside></section><section id="procesos-de-devops" class="title-slide slide level2"><h2>Procesos de DevOps</h2><ul>
 <li>Despliegues</li>
 <li>Rollbacks - Deshacer Despliegue</li>
 <li>Administración de Estado Distribuido</li>
@@ -175,16 +185,21 @@
 <ul>
 <li>creación de recursos de k8s</li>
 </ul></li>
-</ul></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2></section><section id="versiones" class="title-slide slide level3"><h3>Versiones</h3><pre class="bash"><code>$ kubectl version</code></pre>
+</ul></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2><pre class="bash"><code>$ kubectl version
+$ kubectl get componentstatuses</code></pre>
+<aside class="notes">
+<p>Versiones</p>
 <ul>
 <li>Mantenerse entre dos versiones menores de distancia</li>
 <li>No usar nuevas características en clusters viejos</li>
-</ul></section><section id="estados-de-los-componentes" class="title-slide slide level3"><h3>Estados de los componentes</h3><pre class="bash"><code>$ kubectl get componentstatuses</code></pre>
+</ul>
+<p>Estados de los componentes</p>
 <ul>
 <li><strong>controller manager</strong>: controladores regulan el comportamiento del cluster</li>
 <li><strong>scheduler</strong>: asocia diferentes pods en diferentes nodos del cluster</li>
 <li><strong>etcd</strong>: almacenamiento de todos los objetos del API</li>
-</ul></section><section id="nodos-worker" class="title-slide slide level3"><h3>Nodos Worker</h3><pre class="bash"><code>$ kubectl get nodes</code></pre>
+</ul>
+</aside></section><section id="nodos-worker" class="title-slide slide level3"><h3>Nodos Worker</h3><pre class="bash"><code>$ kubectl get nodes</code></pre>
 <ul>
 <li><strong>nodos master</strong>: donde los contenedores centrales del cluster se ejecutan
 <ul>
