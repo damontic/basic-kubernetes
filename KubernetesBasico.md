@@ -147,6 +147,18 @@ Eficiencia
 
 # Arquitectura de Kubernetes
 
+## Ejemplo de Usuarios y Procesos
+
+- **operadores**
+  - instalación
+  - mantenimiento de cluster(s)
+  - recuperación de errores
+  - configuración de clusters
+    - redes
+    - almacenamiento
+- **usuarios del API de k8s** (desarrolladores, qa)
+  - creación de recursos de k8s
+
 ## Componentes
 
 ![](images/components-of-kubernetes.png)

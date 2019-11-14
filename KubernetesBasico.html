@@ -158,7 +158,23 @@
 <li>extensible</li>
 </ul></li>
 </ul></section></section>
-<section><section id="arquitectura-de-kubernetes" class="title-slide slide level1"><h1>Arquitectura de Kubernetes</h1></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2></section><section id="versiones" class="title-slide slide level3"><h3>Versiones</h3><pre class="bash"><code>$ kubectl version</code></pre>
+<section><section id="arquitectura-de-kubernetes" class="title-slide slide level1"><h1>Arquitectura de Kubernetes</h1></section><section id="ejemplo-de-usuarios-y-procesos" class="title-slide slide level2"><h2>Ejemplo de Usuarios y Procesos</h2><ul>
+<li><strong>operadores</strong>
+<ul>
+<li>instalación</li>
+<li>mantenimiento de cluster(s)</li>
+<li>recuperación de errores</li>
+<li>configuración de clusters
+<ul>
+<li>redes</li>
+<li>almacenamiento</li>
+</ul></li>
+</ul></li>
+<li><strong>usuarios del API de k8s</strong> (desarrolladores, qa)
+<ul>
+<li>creación de recursos de k8s</li>
+</ul></li>
+</ul></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2></section><section id="versiones" class="title-slide slide level3"><h3>Versiones</h3><pre class="bash"><code>$ kubectl version</code></pre>
 <ul>
 <li>Mantenerse entre dos versiones menores de distancia</li>
 <li>No usar nuevas características en clusters viejos</li>
