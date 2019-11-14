@@ -60,6 +60,10 @@ author: David Alberto Montaño Fetecua
 
 :::
 
+# ¿Qué es Kubernetes?
+
+![](images/dilbert.png)
+
 ## Abstracciones
 
 > The essence of abstractions is preserving information that is relevant in a given context, and forgetting information that is irrelevant in that context.
@@ -69,16 +73,23 @@ author: David Alberto Montaño Fetecua
 - interfaces de programación - APIs
 - Sistema Operativo - Docker
 
-# ¿Qué es Kubernetes?
-
 ## Kubernetes
 
 <img src="images/originals/kubernetes.svg" style="zoom:50%;" />
 
-- ***Plataforma de administración de aplicaciones y servicios "containerizados"***
+- ***Plataforma de administración de aplicaciones y servicios "containerizados" (OCI)***
   - *código abierto*
   - *configuración declarativa de estado y comportamiento*
   - *facilita instalación y monitoreo de aplicaciones distribuidas*
+
+::: notes
+
+Open Container Iniciative
+
+- runtime specification
+- image specification
+
+:::
 
 ## Beneficios
 
@@ -535,3 +546,5 @@ $ kubectl help | less
 - [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
 - [CNCF: A Kubernetes story](https://www.cncf.io/phippy-goes-to-the-zoo-book/)
 - [Kubernetes.io](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+- [OCI](https://www.opencontainers.org/)
+
