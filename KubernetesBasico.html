@@ -39,6 +39,7 @@
 <li>¿Qué es Kubernetes?</li>
 <li>Arquitectura de Kubernetes</li>
 <li>Algunos Recursos del API</li>
+<li>Algunos Comandos</li>
 <li>Siguientes Pasos</li>
 </ul></section>
 <section><section id="contexto" class="title-slide slide level1"><h1>Contexto</h1></section><section id="objetivos" class="title-slide slide level2"><h2>Objetivos</h2><ul>
@@ -265,7 +266,7 @@ $ kubectl config use-context my-context</code></pre>
 </ul></li>
 </ul></li>
 </ul></section><section id="services" class="title-slide slide level3"><h3>Services</h3></section><section id="pods" class="title-slide slide level3"><h3>Pods</h3></section><section id="ingress" class="title-slide slide level3"><h3>Ingress</h3></section><section id="replicasets" class="title-slide slide level3"><h3>ReplicaSets</h3></section><section id="deployments" class="title-slide slide level3"><h3>Deployments</h3></section><section id="daemonsets" class="title-slide slide level3"><h3>DaemonSets</h3></section><section id="jobs" class="title-slide slide level3"><h3>Jobs</h3></section><section id="configmaps" class="title-slide slide level3"><h3>ConfigMaps</h3></section><section id="secrets" class="title-slide slide level3"><h3>Secrets</h3><p><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></p></section></section>
-<section><section id="siguientes-pasos" class="title-slide slide level1"><h1>Siguientes Pasos</h1></section><section id="instalar-kubernetes" class="title-slide slide level2"><h2>Instalar Kubernetes</h2></section><section id="proveedor-de-nube" class="title-slide slide level3"><h3>Proveedor de Nube</h3></section><section id="gcp" class="slide level4">
+<section><section id="algunos-comandos" class="title-slide slide level1"><h1>Algunos Comandos</h1></section><section id="instalar-kubernetes" class="title-slide slide level2"><h2>Instalar Kubernetes</h2></section><section id="proveedor-de-nube" class="title-slide slide level3"><h3>Proveedor de Nube</h3></section><section id="gcp" class="slide level4">
 <h4>GCP</h4>
 <pre class="bash"><code>$ gcloud config set compute/zone us-west1-a
 $ gcloud container clusters create s4n-cluster
@@ -341,7 +342,8 @@ $ kubectl port-forward &lt;pod-name&gt; 8080:80</code></pre>
 </ul></li>
 </ul></section><section id="kubectl-help" class="title-slide slide level3"><h3>kubectl help</h3><pre class="bash"><code>$ kubectl help
 $ kubectl help | grep kubeconfig
-$ kubectl help | less</code></pre></section><section id="role-based-access-control-rbac" class="title-slide slide level2"><h2>Role Based Access Control (RBAC)</h2><ul>
+$ kubectl help | less</code></pre></section></section>
+<section><section id="siguientes-pasos" class="title-slide slide level1"><h1>Siguientes Pasos</h1></section><section id="role-based-access-control-rbac" class="title-slide slide level2"><h2>Role Based Access Control (RBAC)</h2><ul>
 <li>acceso granular al API de K8s para usuarios y <strong>service accounts</strong></li>
 </ul></section><section id="k8s-storage-solutions" class="title-slide slide level2"><h2>K8s Storage Solutions</h2><ul>
 <li>Best practices</li>

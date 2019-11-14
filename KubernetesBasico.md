@@ -9,6 +9,7 @@ author: David Alberto Montaño Fetecua
 - ¿Qué es Kubernetes?
 - Arquitectura de Kubernetes
 - Algunos Recursos del API
+- Algunos Comandos
 - Siguientes Pasos
 
 # Contexto
@@ -297,7 +298,7 @@ $ kubectl --all-namespaces get pods
 
 [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
 
-# Siguientes Pasos
+# Algunos Comandos
 
 ## Instalar Kubernetes
 
@@ -436,6 +437,8 @@ $ kubectl help
 $ kubectl help | grep kubeconfig
 $ kubectl help | less
 ```
+
+# Siguientes Pasos
 
 ## Role Based Access Control (RBAC)
 
