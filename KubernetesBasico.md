@@ -28,9 +28,7 @@ author: David Alberto Montaño Fetecua
 
 ## Escenarios Diferentes
 
-<img src="images/originals/docker.svg" style="zoom:50%;" />
-
-<img src="images/originals/rkt.svg" style="zoom:50%;" />
+<img src="images/scenarios.svg" style="zoom:50%;" />
 
 ::: notes
 
