@@ -58,16 +58,18 @@
 </ul></li>
 </ul>
 </aside></section><section id="procesos-de-devops" class="title-slide slide level2"><h2>Procesos de DevOps</h2><ul>
-<li>Despliegues</li>
-<li>Rollbacks - Deshacer Despliegue</li>
+<li>Despliegues - Rollbacks</li>
 <li>Administración de Estado Distribuido</li>
-<li>Pruebas</li>
+<li>Aprovisionamiento de Ambientes
+<ul>
+<li>Dev - Pruebas - Carga - Seguridad</li>
+</ul></li>
 <li>Escalabilidad</li>
 <li>Monitoreo</li>
 <li>Lógica de Autocuración</li>
-<li>Aprovisionamiento de Ambientes</li>
 <li>Seguridad</li>
 <li>Administración de la Configuración</li>
+<li>… como código o documentado</li>
 </ul></section><section id="escenarios-diferentes" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img data-src="images/container_evolution.svg" /></p></section><section id="muchas-tecnologías" class="title-slide slide level2"><h2>Muchas tecnologías</h2><p><img src="images/scenarios.svg" style="zoom:50%;" /></p>
 <aside class="notes">
 <ul>
@@ -84,8 +86,7 @@
 </blockquote>
 <ul>
 <li>interfaces de programación - APIs</li>
-<li>Sistema Operativo</li>
-<li>Docker</li>
+<li>Sistema Operativo - Docker</li>
 </ul></section></section>
 <section><section id="qué-es-kubernetes" class="title-slide slide level1"><h1>¿Qué es Kubernetes?</h1></section><section id="kubernetes" class="title-slide slide level2"><h2>Kubernetes</h2><p><img src="images/originals/kubernetes.svg" style="zoom:50%;" /></p>
 <ul>
@@ -145,22 +146,28 @@
 </ul>
 </aside></section><section id="provee" class="title-slide slide level2"><h2>Provee</h2><ul>
 <li>“Descubrimiento” de Servicios y Balanceo de Carga</li>
-<li>Interfaces de Almacenmiento</li>
+<li>Interfaces de Almacenamiento</li>
 <li>Despliegues y Reversiones automáticas</li>
 <li>Asignación automatizada de trabajo a nodos</li>
 <li>Lógica de Auto Curación</li>
 <li>Administración de Configuración y Secretos</li>
 </ul></section><section id="qué-cosas-no-hace-k8s" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
 <li>No limita el tipo de aplicación</li>
-<li>No obtiene código fuente ni construye aplicciones</li>
 <li>No provee servicios de nivel de aplicación
 <ul>
 <li>buses, bases de datos, cachés</li>
 </ul></li>
-<li>No obliga a usar aplicaciones de monitoreo, logging o alerta</li>
-</ul></section><section id="qué-cosas-no-hace-k8s-1" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
-<li>No obliga a usar un lenguaje específico</li>
+<li>No obliga a usar tecnologías específicas de monitoreo, logging o alerta</li>
 <li>No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.</li>
+</ul>
+<aside class="notes">
+<p>No obtiene código fuente ni construye aplicaciones</p>
+<ul>
+<li>aunque tecnologías como Tekton lo permiten</li>
+</ul>
+</aside></section><section id="qué-cosas-no-hace-k8s-1" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
+<li>No obtiene código fuente ni construye aplicaciones</li>
+<li>No obliga a usar un lenguaje específico</li>
 <li>No es un sistema de orquestración pues no tiene centro de control
 <ul>
 <li>poderozo</li>

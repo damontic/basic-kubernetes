@@ -32,16 +32,16 @@ author: David Alberto Montaño Fetecua
 
 ## Procesos de DevOps
 
-- Despliegues
-- Rollbacks - Deshacer Despliegue
+- Despliegues - Rollbacks
 - Administración de Estado Distribuido
-- Pruebas
+- Aprovisionamiento de Ambientes
+  - Dev - Pruebas - Carga - Seguridad
 - Escalabilidad
 - Monitoreo
 - Lógica de Autocuración
-- Aprovisionamiento de Ambientes
 - Seguridad
 - Administración de la Configuración
+- ... como código o documentado
 
 ## Escenarios Diferentes
 
@@ -67,8 +67,7 @@ author: David Alberto Montaño Fetecua
 > – John V. Guttag
 
 - interfaces de programación - APIs
-- Sistema Operativo
-- Docker
+- Sistema Operativo - Docker
 
 # ¿Qué es Kubernetes?
 
@@ -131,7 +130,7 @@ Eficiencia
 ## Provee
 
 - "Descubrimiento" de Servicios y Balanceo de Carga
-- Interfaces de Almacenmiento
+- Interfaces de Almacenamiento
 - Despliegues y Reversiones automáticas
 - Asignación automatizada de trabajo a nodos
 - Lógica de Auto Curación
@@ -140,15 +139,23 @@ Eficiencia
 ## ¿Qué cosas no hace K8s?
 
 - No limita el tipo de aplicación
-- No obtiene código fuente ni construye aplicciones
 - No provee servicios de nivel de aplicación
   - buses, bases de datos, cachés
-- No obliga a usar aplicaciones de monitoreo, logging o alerta
+- No obliga a usar tecnologías específicas de monitoreo, logging o alerta
+- No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.
+
+::: notes
+
+No obtiene código fuente ni construye aplicaciones
+
+- aunque tecnologías como Tekton lo permiten
+
+:::
 
 ## ¿Qué cosas no hace K8s?
 
+- No obtiene código fuente ni construye aplicaciones
 - No obliga a usar un lenguaje específico
-- No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.
 - No es un sistema de orquestración pues no tiene centro de control
   - poderozo
   - robusto
