@@ -13,6 +13,13 @@ author: David Alberto Montaño Fetecua
 
 # Contexto
 
+## Objetivos
+
+- Entender beneficios de usar Kubernetes
+- Conocer su arquitectura
+- Conocer recursos más relevantes
+- Saber qué pasos seguir para empezar
+
 ## Procesos de DevOps
 
 - Despliegues
@@ -30,7 +37,7 @@ author: David Alberto Montaño Fetecua
 
 ![](images/container_evolution.svg)
 
-## Escenarios Diferentes
+## Muchas tecnologías
 
 <img src="images/scenarios.svg" style="zoom:50%;" />
 
@@ -49,11 +56,9 @@ author: David Alberto Montaño Fetecua
 
 <img src="images/originals/kubernetes.svg" style="zoom:50%;" />
 
-- ***Plataforma de administraicón de aplicaciones y servicios "containerizados"***
+- ***Plataforma de administración de aplicaciones y servicios "containerizados"***
   - *código abierto*
-  - *configuración declarativa*
-  - *automatiza procesos de despliegue*
-  - *automatiza procesos de escalabilidad*
+  - *configuración declarativa de estado y comportamiento*
   - *facilita instalación y monitoreo de aplicaciones distribuidas*
 
 ## Beneficios
@@ -103,92 +108,47 @@ Eficiencia
 
 :::
 
+## Provee
+
+- "Descubrimiento" de Servicios y Balanceo de Carga
+- Interfaces de Almacenmiento
+- Despliegues y Reversiones automáticas
+- Asignación automatizada de trabajo a nodos
+- Lógica de Auto Curación
+- Administración de Configuración y Secretos
+
+## ¿Qué cosas no hace K8s?
+
+- No limita el tipo de aplicación
+- No obtiene código fuente ni construye aplicciones
+- No provee servicios de nivel de aplicación
+- No obliga a usar aplicaciones de monitoreo, logging o alerta
+- No obliga a usar un lenguaje específico
+- No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.
+- No es un sistema de orquestración pues no tiene centro de control
+
+::: notes
+
+- No limita el tipo de aplicación
+- No obtiene código fuente ni construye aplicciones
+- No provee servicios de nivel de aplicación
+  - como buses, bases de datos, cachés
+- No obliga a usar aplicaciones de monitoreo, logging o alerta
+- No obliga a usar un lenguaje específico
+- No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.
+- No es un sistema de orquestración pues no tiene centro de control
+  - poderozo
+  - robusto
+  - resiliente
+  - extensible
+
+:::
+
 # Arquitectura de Kubernetes
 
 ## Componentes
 
 ![](images/components-of-kubernetes.png)
-
-## Desplegando un cluster
-
-### Proveedor de Nube
-
-#### GCP
-
-```bash
-$ gcloud config set compute/zone us-west1-a
-$ gcloud container clusters create s4n-cluster
-$ gcloud auth application-default login
-```
-
-#### Azure
-
-```bash
-$ az group create --name=s4n --location=westus
-$ az aks create --resource-group=s4n --name=s4n-cluster
-$ az aks get-credentials --resource-group=s4n --name=s4n-cluster
-```
-
-#### AWS
-
-```bash
-$ eksctl create cluster --name s4n ...
-```
-
-#### Digital Ocean
-
-```bash
-$ doctl kubernetes cluster list
-$ doctl kubernetes cluster kubeconfig save s4n
-$ kubectl get nodes
-```
-
-### Máquina local
-
-#### minikube
-
-Asegúrese de instalar un hypervisor como **virtualbox** o **kvm**.
-
-```bash
-$ minikube start
-$ minikube stop
-$ minikube delete
-```
-
-#### kind
-
-Kubernetes in Docker
-
-```bash
-$ kind create cluster --wait 5min
-$ export KUBECONFIG="$(kind get kubeconfig-path)"
-$ kubectl cluster-info
-$ kind delete cluster
-```
-
-### Máquinas on premise
-
-#### k3s de Rancher
-
-```bash
-# On Server
-$ curl -sfL https://get.k3s.io | sh -
-$ sudo k3s server &
-# Kubeconfig is written to /etc/rancher/k3s/k3s.yaml
-$ sudo k3s kubectl get nodes
-
-# On Nodes
-$ curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=XXX sh -
-# On a different node run the below. NODE_TOKEN comes from 
-# /var/lib/rancher/k3s/server/node-token on your server
-$ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}
-```
-
-#### Ansible
-
-- [Kubernetes setup using ansible and vagrant](https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/)
-- [Ansible Galaxy](https://galaxy.ansible.com/geerlingguy/kubernetes)
-- [Openshift](https://github.com/openshift/openshift-ansible)
 
 ## Cliente de Kubernetes
 
@@ -324,7 +284,90 @@ $ kubectl --all-namespaces get pods
 
 [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
 
-## Interactuando con Objetos del API de Kubernetes
+# Siguientes Pasos
+
+## Instalar Kubernetes
+
+### Proveedor de Nube
+
+#### GCP
+
+```bash
+$ gcloud config set compute/zone us-west1-a
+$ gcloud container clusters create s4n-cluster
+$ gcloud auth application-default login
+```
+
+#### Azure
+
+```bash
+$ az group create --name=s4n --location=westus
+$ az aks create --resource-group=s4n --name=s4n-cluster
+$ az aks get-credentials --resource-group=s4n --name=s4n-cluster
+```
+
+#### AWS
+
+```bash
+$ eksctl create cluster --name s4n ...
+```
+
+#### Digital Ocean
+
+```bash
+$ doctl kubernetes cluster list
+$ doctl kubernetes cluster kubeconfig save s4n
+$ kubectl get nodes
+```
+
+### Máquina local
+
+#### minikube
+
+Asegúrese de instalar un hypervisor como **virtualbox** o **kvm**.
+
+```bash
+$ minikube start
+$ minikube stop
+$ minikube delete
+```
+
+#### kind
+
+Kubernetes in Docker
+
+```bash
+$ kind create cluster --wait 5min
+$ export KUBECONFIG="$(kind get kubeconfig-path)"
+$ kubectl cluster-info
+$ kind delete cluster
+```
+
+### Máquinas on premise
+
+#### k3s de Rancher
+
+```bash
+# On Server
+$ curl -sfL https://get.k3s.io | sh -
+$ sudo k3s server &
+# Kubeconfig is written to /etc/rancher/k3s/k3s.yaml
+$ sudo k3s kubectl get nodes
+
+# On Nodes
+$ curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=XXX sh -
+# On a different node run the below. NODE_TOKEN comes from 
+# /var/lib/rancher/k3s/server/node-token on your server
+$ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}
+```
+
+#### Ansible
+
+- [Kubernetes setup using ansible and vagrant](https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/)
+- [Ansible Galaxy](https://galaxy.ansible.com/geerlingguy/kubernetes)
+- [Openshift](https://github.com/openshift/openshift-ansible)
+
+## Interactuar con Objetos del API de Kubernetes
 
 ### Describir Objetos del API
 
@@ -380,8 +423,6 @@ $ kubectl help
 $ kubectl help | grep kubeconfig
 $ kubectl help | less
 ```
-
-# Siguientes Pasos
 
 ## Role Based Access Control (RBAC)
 

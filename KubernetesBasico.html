@@ -41,7 +41,12 @@
 <li>Algunos Recursos del API</li>
 <li>Siguientes Pasos</li>
 </ul></section>
-<section><section id="contexto" class="title-slide slide level1"><h1>Contexto</h1></section><section id="procesos-de-devops" class="title-slide slide level2"><h2>Procesos de DevOps</h2><ul>
+<section><section id="contexto" class="title-slide slide level1"><h1>Contexto</h1></section><section id="objetivos" class="title-slide slide level2"><h2>Objetivos</h2><ul>
+<li>Entender beneficios de usar Kubernetes</li>
+<li>Conocer su arquitectura</li>
+<li>Conocer recursos más relevantes</li>
+<li>Saber qué pasos seguir para empezar</li>
+</ul></section><section id="procesos-de-devops" class="title-slide slide level2"><h2>Procesos de DevOps</h2><ul>
 <li>Despliegues</li>
 <li>Rollbacks - Deshacer Despliegue</li>
 <li>Administración de Estado Distribuido</li>
@@ -52,7 +57,7 @@
 <li>Aprovisionamiento de Ambientes</li>
 <li>Seguridad</li>
 <li>Administración de la Configuración</li>
-</ul></section><section id="escenarios-diferentes" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img data-src="images/container_evolution.svg" /></p></section><section id="escenarios-diferentes-1" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img src="images/scenarios.svg" style="zoom:50%;" /></p>
+</ul></section><section id="escenarios-diferentes" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img data-src="images/container_evolution.svg" /></p></section><section id="muchas-tecnologías" class="title-slide slide level2"><h2>Muchas tecnologías</h2><p><img src="images/scenarios.svg" style="zoom:50%;" /></p>
 <aside class="notes">
 <ul>
 <li><strong>Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo</strong> (Windows Services, init.d, upstart, systemctl)
@@ -65,12 +70,10 @@
 </aside></section></section>
 <section><section id="qué-es-kubernetes" class="title-slide slide level1"><h1>¿Qué es Kubernetes?</h1></section><section id="kubernetes" class="title-slide slide level2"><h2>Kubernetes</h2><p><img src="images/originals/kubernetes.svg" style="zoom:50%;" /></p>
 <ul>
-<li><strong><em>Plataforma de administraicón de aplicaciones y servicios “containerizados”</em></strong>
+<li><strong><em>Plataforma de administración de aplicaciones y servicios “containerizados”</em></strong>
 <ul>
 <li><em>código abierto</em></li>
-<li><em>configuración declarativa</em></li>
-<li><em>automatiza procesos de despliegue</em></li>
-<li><em>automatiza procesos de escalabilidad</em></li>
+<li><em>configuración declarativa de estado y comportamiento</em></li>
 <li><em>facilita instalación y monitoreo de aplicaciones distribuidas</em></li>
 </ul></li>
 </ul></section><section id="beneficios" class="title-slide slide level2"><h2>Beneficios</h2><ul>
@@ -121,59 +124,43 @@
 <ul>
 <li>Facilita encontrar el número óptimo de nodos usado al mismo tiempo por varios equipos</li>
 </ul>
-</aside></section></section>
-<section><section id="arquitectura-de-kubernetes" class="title-slide slide level1"><h1>Arquitectura de Kubernetes</h1></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p></section><section id="desplegando-un-cluster" class="title-slide slide level2"><h2>Desplegando un cluster</h2></section><section id="proveedor-de-nube" class="title-slide slide level3"><h3>Proveedor de Nube</h3></section><section id="gcp" class="slide level4">
-<h4>GCP</h4>
-<pre class="bash"><code>$ gcloud config set compute/zone us-west1-a
-$ gcloud container clusters create s4n-cluster
-$ gcloud auth application-default login</code></pre>
-</section><section id="azure" class="slide level4">
-<h4>Azure</h4>
-<pre class="bash"><code>$ az group create --name=s4n --location=westus
-$ az aks create --resource-group=s4n --name=s4n-cluster
-$ az aks get-credentials --resource-group=s4n --name=s4n-cluster</code></pre>
-</section><section id="aws" class="slide level4">
-<h4>AWS</h4>
-<pre class="bash"><code>$ eksctl create cluster --name s4n ...</code></pre>
-</section><section id="digital-ocean" class="slide level4">
-<h4>Digital Ocean</h4>
-<pre class="bash"><code>$ doctl kubernetes cluster list
-$ doctl kubernetes cluster kubeconfig save s4n
-$ kubectl get nodes</code></pre>
-</section><section id="máquina-local" class="title-slide slide level3"><h3>Máquina local</h3></section><section id="minikube" class="slide level4">
-<h4>minikube</h4>
-<p>Asegúrese de instalar un hypervisor como <strong>virtualbox</strong> o <strong>kvm</strong>.</p>
-<pre class="bash"><code>$ minikube start
-$ minikube stop
-$ minikube delete</code></pre>
-</section><section id="kind" class="slide level4">
-<h4>kind</h4>
-<p>Kubernetes in Docker</p>
-<pre class="bash"><code>$ kind create cluster --wait 5min
-$ export KUBECONFIG=&quot;$(kind get kubeconfig-path)&quot;
-$ kubectl cluster-info
-$ kind delete cluster</code></pre>
-</section><section id="máquinas-on-premise" class="title-slide slide level3"><h3>Máquinas on premise</h3></section><section id="k3s-de-rancher" class="slide level4">
-<h4>k3s de Rancher</h4>
-<pre class="bash"><code># On Server
-$ curl -sfL https://get.k3s.io | sh -
-$ sudo k3s server &amp;
-# Kubeconfig is written to /etc/rancher/k3s/k3s.yaml
-$ sudo k3s kubectl get nodes
-
-# On Nodes
-$ curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=XXX sh -
-# On a different node run the below. NODE_TOKEN comes from 
-# /var/lib/rancher/k3s/server/node-token on your server
-$ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}</code></pre>
-</section><section id="ansible" class="slide level4">
-<h4>Ansible</h4>
-<ul>
-<li><a href="https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/">Kubernetes setup using ansible and vagrant</a></li>
-<li><a href="https://galaxy.ansible.com/geerlingguy/kubernetes">Ansible Galaxy</a></li>
-<li><a href="https://github.com/openshift/openshift-ansible">Openshift</a></li>
+</aside></section><section id="provee" class="title-slide slide level2"><h2>Provee</h2><ul>
+<li>“Descubrimiento” de Servicios y Balanceo de Carga</li>
+<li>Interfaces de Almacenmiento</li>
+<li>Despliegues y Reversiones automáticas</li>
+<li>Asignación automatizada de trabajo a nodos</li>
+<li>Lógica de Auto Curación</li>
+<li>Administración de Configuración y Secretos</li>
+</ul></section><section id="qué-cosas-no-hace-k8s" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
+<li>No limita el tipo de aplicación</li>
+<li>No obtiene código fuente ni construye aplicciones</li>
+<li>No provee servicios de nivel de aplicación</li>
+<li>No obliga a usar aplicaciones de monitoreo, logging o alerta</li>
+<li>No obliga a usar un lenguaje específico</li>
+<li>No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.</li>
+<li>No es un sistema de orquestración pues no tiene centro de control</li>
 </ul>
-</section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2></section><section id="versiones" class="title-slide slide level3"><h3>Versiones</h3><pre class="bash"><code>$ kubectl version</code></pre>
+<aside class="notes">
+<ul>
+<li>No limita el tipo de aplicación</li>
+<li>No obtiene código fuente ni construye aplicciones</li>
+<li>No provee servicios de nivel de aplicación
+<ul>
+<li>como buses, bases de datos, cachés</li>
+</ul></li>
+<li>No obliga a usar aplicaciones de monitoreo, logging o alerta</li>
+<li>No obliga a usar un lenguaje específico</li>
+<li>No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.</li>
+<li>No es un sistema de orquestración pues no tiene centro de control
+<ul>
+<li>poderozo</li>
+<li>robusto</li>
+<li>resiliente</li>
+<li>extensible</li>
+</ul></li>
+</ul>
+</aside></section></section>
+<section><section id="arquitectura-de-kubernetes" class="title-slide slide level1"><h1>Arquitectura de Kubernetes</h1></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2></section><section id="versiones" class="title-slide slide level3"><h3>Versiones</h3><pre class="bash"><code>$ kubectl version</code></pre>
 <ul>
 <li>Mantenerse entre dos versiones menores de distancia</li>
 <li>No usar nuevas características en clusters viejos</li>
@@ -263,7 +250,59 @@ $ kubectl config use-context my-context</code></pre>
 <li>eksctl</li>
 </ul></li>
 </ul></li>
-</ul></section><section id="services" class="title-slide slide level3"><h3>Services</h3></section><section id="pods" class="title-slide slide level3"><h3>Pods</h3></section><section id="ingress" class="title-slide slide level3"><h3>Ingress</h3></section><section id="replicasets" class="title-slide slide level3"><h3>ReplicaSets</h3></section><section id="deployments" class="title-slide slide level3"><h3>Deployments</h3></section><section id="daemonsets" class="title-slide slide level3"><h3>DaemonSets</h3></section><section id="jobs" class="title-slide slide level3"><h3>Jobs</h3></section><section id="configmaps" class="title-slide slide level3"><h3>ConfigMaps</h3></section><section id="secrets" class="title-slide slide level3"><h3>Secrets</h3><p><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></p></section><section id="interactuando-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuando con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
+</ul></section><section id="services" class="title-slide slide level3"><h3>Services</h3></section><section id="pods" class="title-slide slide level3"><h3>Pods</h3></section><section id="ingress" class="title-slide slide level3"><h3>Ingress</h3></section><section id="replicasets" class="title-slide slide level3"><h3>ReplicaSets</h3></section><section id="deployments" class="title-slide slide level3"><h3>Deployments</h3></section><section id="daemonsets" class="title-slide slide level3"><h3>DaemonSets</h3></section><section id="jobs" class="title-slide slide level3"><h3>Jobs</h3></section><section id="configmaps" class="title-slide slide level3"><h3>ConfigMaps</h3></section><section id="secrets" class="title-slide slide level3"><h3>Secrets</h3><p><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></p></section></section>
+<section><section id="siguientes-pasos" class="title-slide slide level1"><h1>Siguientes Pasos</h1></section><section id="instalar-kubernetes" class="title-slide slide level2"><h2>Instalar Kubernetes</h2></section><section id="proveedor-de-nube" class="title-slide slide level3"><h3>Proveedor de Nube</h3></section><section id="gcp" class="slide level4">
+<h4>GCP</h4>
+<pre class="bash"><code>$ gcloud config set compute/zone us-west1-a
+$ gcloud container clusters create s4n-cluster
+$ gcloud auth application-default login</code></pre>
+</section><section id="azure" class="slide level4">
+<h4>Azure</h4>
+<pre class="bash"><code>$ az group create --name=s4n --location=westus
+$ az aks create --resource-group=s4n --name=s4n-cluster
+$ az aks get-credentials --resource-group=s4n --name=s4n-cluster</code></pre>
+</section><section id="aws" class="slide level4">
+<h4>AWS</h4>
+<pre class="bash"><code>$ eksctl create cluster --name s4n ...</code></pre>
+</section><section id="digital-ocean" class="slide level4">
+<h4>Digital Ocean</h4>
+<pre class="bash"><code>$ doctl kubernetes cluster list
+$ doctl kubernetes cluster kubeconfig save s4n
+$ kubectl get nodes</code></pre>
+</section><section id="máquina-local" class="title-slide slide level3"><h3>Máquina local</h3></section><section id="minikube" class="slide level4">
+<h4>minikube</h4>
+<p>Asegúrese de instalar un hypervisor como <strong>virtualbox</strong> o <strong>kvm</strong>.</p>
+<pre class="bash"><code>$ minikube start
+$ minikube stop
+$ minikube delete</code></pre>
+</section><section id="kind" class="slide level4">
+<h4>kind</h4>
+<p>Kubernetes in Docker</p>
+<pre class="bash"><code>$ kind create cluster --wait 5min
+$ export KUBECONFIG=&quot;$(kind get kubeconfig-path)&quot;
+$ kubectl cluster-info
+$ kind delete cluster</code></pre>
+</section><section id="máquinas-on-premise" class="title-slide slide level3"><h3>Máquinas on premise</h3></section><section id="k3s-de-rancher" class="slide level4">
+<h4>k3s de Rancher</h4>
+<pre class="bash"><code># On Server
+$ curl -sfL https://get.k3s.io | sh -
+$ sudo k3s server &amp;
+# Kubeconfig is written to /etc/rancher/k3s/k3s.yaml
+$ sudo k3s kubectl get nodes
+
+# On Nodes
+$ curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=XXX sh -
+# On a different node run the below. NODE_TOKEN comes from 
+# /var/lib/rancher/k3s/server/node-token on your server
+$ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}</code></pre>
+</section><section id="ansible" class="slide level4">
+<h4>Ansible</h4>
+<ul>
+<li><a href="https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/">Kubernetes setup using ansible and vagrant</a></li>
+<li><a href="https://galaxy.ansible.com/geerlingguy/kubernetes">Ansible Galaxy</a></li>
+<li><a href="https://github.com/openshift/openshift-ansible">Openshift</a></li>
+</ul>
+</section><section id="interactuar-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuar con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
 $ kubectl describe &lt;resource-name&gt; &lt;obj-name&gt;</code></pre></section><section id="crear-actualizar-y-destruir-objetos-de-k8s" class="title-slide slide level3"><h3>Crear, Actualizar y Destruir Objetos de K8s</h3><pre class="bash"><code>$ kubectl apply -f obj.yaml
 $ vi obj.yaml # update some resources
 $ kubectl apply --dry-run -f obj.yaml # output the changes without making them
@@ -288,8 +327,7 @@ $ kubectl port-forward &lt;pod-name&gt; 8080:80</code></pre>
 </ul></li>
 </ul></section><section id="kubectl-help" class="title-slide slide level3"><h3>kubectl help</h3><pre class="bash"><code>$ kubectl help
 $ kubectl help | grep kubeconfig
-$ kubectl help | less</code></pre></section></section>
-<section><section id="siguientes-pasos" class="title-slide slide level1"><h1>Siguientes Pasos</h1></section><section id="role-based-access-control-rbac" class="title-slide slide level2"><h2>Role Based Access Control (RBAC)</h2><ul>
+$ kubectl help | less</code></pre></section><section id="role-based-access-control-rbac" class="title-slide slide level2"><h2>Role Based Access Control (RBAC)</h2><ul>
 <li>acceso granular al API de K8s para usuarios y <strong>service accounts</strong></li>
 </ul></section><section id="k8s-storage-solutions" class="title-slide slide level2"><h2>K8s Storage Solutions</h2><ul>
 <li>Best practices</li>
