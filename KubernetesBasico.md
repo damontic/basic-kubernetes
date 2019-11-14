@@ -30,6 +30,23 @@ author: David Alberto Montaño Fetecua
 
 :::
 
+## Escenarios Diferentes
+
+![](images/container_evolution.svg)
+
+## ¿Qué tecnología aprendo ahora?
+
+<img src="images/scenarios.svg" style="zoom:50%;" />
+
+::: notes
+
+- **Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo** (Windows Services, init.d, upstart, systemctl)
+  - Máquinas Físicas
+  - Máquinas Virtuales
+- **Aplicaciones Containerizadas** (estándar OCI, docker, rkt, podman, buildah, containerd)
+
+:::
+
 ## Procesos de DevOps
 
 - Despliegues - Rollbacks
@@ -43,20 +60,9 @@ author: David Alberto Montaño Fetecua
 - Administración de la Configuración
 - ... como código o documentado
 
-## Escenarios Diferentes
-
-![](images/container_evolution.svg)
-
-## Muchas tecnologías
-
-<img src="images/scenarios.svg" style="zoom:50%;" />
-
 ::: notes
 
-- **Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo** (Windows Services, init.d, upstart, systemctl)
-  - Máquinas Físicas
-  - Máquinas Virtuales
-- **Aplicaciones Containerizadas** (estándar OCI, docker, rkt, podman, buildah, containerd)
+necesitamos concentrarnos más en procesos y menos en tecnologías
 
 :::
 
@@ -73,14 +79,24 @@ author: David Alberto Montaño Fetecua
 - interfaces de programación - APIs
 - Sistema Operativo - Docker
 
+::: notes
+
+Docker es una abstracción
+
+restringido a correrlo en una única máquina
+
+intentos: docker swarm, machine, compose
+
+:::
+
 ## Kubernetes
 
 <img src="images/originals/kubernetes.svg" style="zoom:50%;" />
 
 - ***Plataforma de administración de aplicaciones y servicios "containerizados" (OCI)***
-  - *código abierto*
-  - *configuración declarativa de estado y comportamiento*
-  - *facilita instalación y monitoreo de aplicaciones distribuidas*
+  - **código abierto**
+  - **configuración declarativa** de estado y comportamiento
+  - facilita instalación y monitoreo de **aplicaciones distribuidas**
 
 ::: notes
 
@@ -107,20 +123,16 @@ Alto número de features + mantener una alta disponibilidad de los servicios
 - Inmutabilidad
 - Configuración Declarativa
 - Sistemas de autocuración online
+- Instalación de aplicaciones (HELM)
 
 Escalabilidad (software y equipo)
 
 - Desacoplamiento de Arquitecturas
   - desacoplando aplicaciones: load balancers for each
-  - desacoplando equipos e infraestructura
   - desacoplando recursos de k8s: pods, namespaces, services, ingresses
-
-- Separación de Intereses en cuanto a Consistencia y Escalabilidad
-  - Desarrollador de Aplicación depende de los SLAs
-  - El Ingeniero Fiabilidad del API de Orquestración de Contenedores se enfoca en entregar unos SLAs sobre el API sin preocuparse de las aplicaciones que corren encima de esta.
-  - Los ingenieros de fiabilidad del Sistema Operativo se enfocan en los SLAs de los individuales sistemas operativos instalados en cada máquina.
-
+  
 - KaaS
+  - gcp - aws
   - Tectonic + Openshit
   - Rancher
   - Digital Ocean
@@ -146,6 +158,12 @@ Eficiencia
 - Asignación automatizada de trabajo a nodos
 - Lógica de Auto Curación
 - Administración de Configuración y Secretos
+
+::: notes
+
+creo que a medida que k8s evolucione va a cubrir más y más los procesos de devops
+
+:::
 
 ## ¿Qué cosas no hace K8s?
 
@@ -179,17 +197,105 @@ No obtiene código fuente ni construye aplicaciones
 
 - **operadores**
   - instalación
-  - mantenimiento de cluster(s)
-  - recuperación de errores
+  - mantenimiento (100s) de cluster(s)
   - configuración de clusters
-    - redes
-    - almacenamiento
+    - redes - almacenamiento
 - **usuarios del API de k8s** (desarrolladores, qa)
   - creación de recursos de k8s
+- **usuarios finales**
+
+::: notes
+
+los operadores idealmente conocen las entrañas de k8s
+
+usuarios finales ni saben que interactúan con kubernetes: pokemon go
+
+:::
 
 ## Componentes
 
 ![](images/components-of-kubernetes.png)
+
+::: notes
+
+CONCEPTOS: cluster, nodo
+
+RECURSO del API: pod
+
+Cuando despliegan k8s obtienen un cluster
+
+Un cluster es un conjunto de máquinas llamadas **nodos**, que corren aplicaciones containerizadas y que son administradas por k8s.
+
+Un cluster tiene por lo menos un nodo trabajador y un nodo maestro.
+
+Los nodos trabajadores abergan los **pods** que son los componentes de la aplicación.
+
+Los nodos maestro administran
+
+- los nodos trabajadores
+- los pods en el cluster
+
+Con múltiples nodos amestros se consigue conmutación por error y alta disponibilidad del cluster.
+
+:::
+
+## Componentes del Nodo Maestro
+
+- Decisiones globales del cluster
+- Detectan y responden a eventos del cluster
+- Sus componentes pueden arrancar en cualquier nodo
+
+::: notes
+
+- scripts por defecto
+  - los arrancan en el mismo nodo
+  - impiden ejecución de pods de usuarios
+
+:::
+
+### kube API Server
+
+### etcd
+
+### kube-scheduler
+
+### kube controller manager
+
+### cloud manager
+
+## Componentes de los Nodos Trabajadores
+
+### kubelet
+
+### kube proxy
+
+- Enruta el tráfico de red hacia servicios con balanceadores de carga en el cluster
+- Presente en cada nodo del cluster
+  - Usualmente corre como un **DaemonSet**
+
+### Container Runtime
+
+- asd
+
+## Complementos
+
+### DNS
+
+- Provee nombramiento y descubrimiento de los servicios definidos en el cluster
+- Dependiendo del tamaño del cluster se pueden encontrar uno o más corriendo
+  - Usualmente corre como un **Deployment**
+  - Usa un **Service** para balancear la carga entre las instancias del servidor de DNS
+- La ip del **Service** se encuentra en el archivo `/etc/resolv.conf` de cada contenedor que se ejecuta en el cluster
+
+### Web UI
+
+- Corre una única replica de **Deployment** y usa un **Service** para estar disponible desde el cluster
+- Puede ser accedido usando `$ kubectl proxy`
+- No siempre se instala
+
+### Container Resource Monitoring
+
+### Cluster Level Logging
 
 ## Cliente de Kubernetes
 
@@ -217,16 +323,10 @@ Estados de los componentes
 
 ```bash
 $ kubectl get nodes
-```
-
-- **nodos master**: donde los contenedores centrales del cluster se ejecutan
-  - server API: servidor del API
-  - scheduler: calendarizador
-- **nodos worker**: donde los contenedores de aplicación se ejecutan
-
-```bash
 $ kubectl describe nodes node-1
 ```
+
+::: notes
 
 - muestra información sobre
   - nodo
@@ -243,29 +343,7 @@ $ kubectl describe nodes node-1
     - Pods
   - Pods que corren actualmente
 
-## Componentes del Cluster
-
-Los siguientes componentes corren en el namespace **kube-system**.
-
-### Kubernetes Proxy
-
-- Enruta el tráfico de red hacia servicios con balanceadores de carga en el cluster
-- Presente en cada nodo del cluster
-  - Usualmente corre como un **DaemonSet**
-
-### Kubernetes DNS
-
-- Provee nombramiento y descubrimiento de los servicios definidos en el cluster
-- Dependiendo del tamaño del cluster se pueden encontrar uno o más corriendo
-  - Usualmente corre como un **Deployment**
-  - Usa un **Service** para balancear la carga entre las instancias del servidor de DNS
-- La ip del **Service** se encuentra en el archivo `/etc/resolv.conf` de cada contenedor que se ejecuta en el cluster
-
-### Kubernetes UI
-
-- Corre una única replica de **Deployment** y usa un **Service** para estar disponible desde el cluster
-- Puede ser accedido usando `$ kubectl proxy`
-- No siempre se instala
+:::
 
 # Algunos Recursos del API
 
@@ -547,4 +625,4 @@ $ kubectl help | less
 - [CNCF: A Kubernetes story](https://www.cncf.io/phippy-goes-to-the-zoo-book/)
 - [Kubernetes.io](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
 - [OCI](https://www.opencontainers.org/)
-
+- [Bringing Pokemon GO to life on gcp](https://cloud.google.com/blog/products/gcp/bringing-pokemon-go-to-life-on-google-cloud)

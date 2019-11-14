@@ -57,6 +57,16 @@
 <li>microservicios que se comunican por APIs REST</li>
 </ul></li>
 </ul>
+</aside></section><section id="escenarios-diferentes" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img data-src="images/container_evolution.svg" /></p></section><section id="qué-tecnología-aprendo-ahora" class="title-slide slide level2"><h2>¿Qué tecnología aprendo ahora?</h2><p><img src="images/scenarios.svg" style="zoom:50%;" /></p>
+<aside class="notes">
+<ul>
+<li><strong>Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo</strong> (Windows Services, init.d, upstart, systemctl)
+<ul>
+<li>Máquinas Físicas</li>
+<li>Máquinas Virtuales</li>
+</ul></li>
+<li><strong>Aplicaciones Containerizadas</strong> (estándar OCI, docker, rkt, podman, buildah, containerd)</li>
+</ul>
 </aside></section><section id="procesos-de-devops" class="title-slide slide level2"><h2>Procesos de DevOps</h2><ul>
 <li>Despliegues - Rollbacks</li>
 <li>Administración de Estado Distribuido</li>
@@ -70,16 +80,9 @@
 <li>Seguridad</li>
 <li>Administración de la Configuración</li>
 <li>… como código o documentado</li>
-</ul></section><section id="escenarios-diferentes" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img data-src="images/container_evolution.svg" /></p></section><section id="muchas-tecnologías" class="title-slide slide level2"><h2>Muchas tecnologías</h2><p><img src="images/scenarios.svg" style="zoom:50%;" /></p>
-<aside class="notes">
-<ul>
-<li><strong>Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo</strong> (Windows Services, init.d, upstart, systemctl)
-<ul>
-<li>Máquinas Físicas</li>
-<li>Máquinas Virtuales</li>
-</ul></li>
-<li><strong>Aplicaciones Containerizadas</strong> (estándar OCI, docker, rkt, podman, buildah, containerd)</li>
 </ul>
+<aside class="notes">
+<p>necesitamos concentrarnos más en procesos y menos en tecnologías</p>
 </aside></section></section>
 <section><section id="qué-es-kubernetes" class="title-slide slide level1"><h1>¿Qué es Kubernetes?</h1><p><img data-src="images/dilbert.png" /></p></section><section id="abstracciones" class="title-slide slide level2"><h2>Abstracciones</h2><blockquote>
 <p>The essence of abstractions is preserving information that is relevant in a given context, and forgetting information that is irrelevant in that context.</p>
@@ -88,13 +91,18 @@
 <ul>
 <li>interfaces de programación - APIs</li>
 <li>Sistema Operativo - Docker</li>
-</ul></section><section id="kubernetes" class="title-slide slide level2"><h2>Kubernetes</h2><p><img src="images/originals/kubernetes.svg" style="zoom:50%;" /></p>
+</ul>
+<aside class="notes">
+<p>Docker es una abstracción</p>
+<p>restringido a correrlo en una única máquina</p>
+<p>intentos: docker swarm, machine, compose</p>
+</aside></section><section id="kubernetes" class="title-slide slide level2"><h2>Kubernetes</h2><p><img src="images/originals/kubernetes.svg" style="zoom:50%;" /></p>
 <ul>
 <li><strong><em>Plataforma de administración de aplicaciones y servicios “containerizados” (OCI)</em></strong>
 <ul>
-<li><em>código abierto</em></li>
-<li><em>configuración declarativa de estado y comportamiento</em></li>
-<li><em>facilita instalación y monitoreo de aplicaciones distribuidas</em></li>
+<li><strong>código abierto</strong></li>
+<li><strong>configuración declarativa</strong> de estado y comportamiento</li>
+<li>facilita instalación y monitoreo de <strong>aplicaciones distribuidas</strong></li>
 </ul></li>
 </ul>
 <aside class="notes">
@@ -116,23 +124,18 @@
 <li>Inmutabilidad</li>
 <li>Configuración Declarativa</li>
 <li>Sistemas de autocuración online</li>
+<li>Instalación de aplicaciones (HELM)</li>
 </ul>
 <p>Escalabilidad (software y equipo)</p>
 <ul>
 <li>Desacoplamiento de Arquitecturas
 <ul>
 <li>desacoplando aplicaciones: load balancers for each</li>
-<li>desacoplando equipos e infraestructura</li>
 <li>desacoplando recursos de k8s: pods, namespaces, services, ingresses</li>
-</ul></li>
-<li>Separación de Intereses en cuanto a Consistencia y Escalabilidad
-<ul>
-<li>Desarrollador de Aplicación depende de los SLAs</li>
-<li>El Ingeniero Fiabilidad del API de Orquestración de Contenedores se enfoca en entregar unos SLAs sobre el API sin preocuparse de las aplicaciones que corren encima de esta.</li>
-<li>Los ingenieros de fiabilidad del Sistema Operativo se enfocan en los SLAs de los individuales sistemas operativos instalados en cada máquina.</li>
 </ul></li>
 <li>KaaS
 <ul>
+<li>gcp - aws</li>
 <li>Tectonic + Openshit</li>
 <li>Rancher</li>
 <li>Digital Ocean</li>
@@ -158,7 +161,10 @@
 <li>Asignación automatizada de trabajo a nodos</li>
 <li>Lógica de Auto Curación</li>
 <li>Administración de Configuración y Secretos</li>
-</ul></section><section id="qué-cosas-no-hace-k8s" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
+</ul>
+<aside class="notes">
+<p>creo que a medida que k8s evolucione va a cubrir más y más los procesos de devops</p>
+</aside></section><section id="qué-cosas-no-hace-k8s" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
 <li>No limita el tipo de aplicación</li>
 <li>No provee servicios de nivel de aplicación
 <ul>
@@ -187,19 +193,69 @@
 <li><strong>operadores</strong>
 <ul>
 <li>instalación</li>
-<li>mantenimiento de cluster(s)</li>
-<li>recuperación de errores</li>
+<li>mantenimiento (100s) de cluster(s)</li>
 <li>configuración de clusters
 <ul>
-<li>redes</li>
-<li>almacenamiento</li>
+<li>redes - almacenamiento</li>
 </ul></li>
 </ul></li>
 <li><strong>usuarios del API de k8s</strong> (desarrolladores, qa)
 <ul>
 <li>creación de recursos de k8s</li>
 </ul></li>
-</ul></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2><pre class="bash"><code>$ kubectl version
+<li><strong>usuarios finales</strong></li>
+</ul>
+<aside class="notes">
+<p>los operadores idealmente conocen las entrañas de k8s</p>
+<p>usuarios finales ni saben que interactúan con kubernetes: pokemon go</p>
+</aside></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p>
+<aside class="notes">
+<p>CONCEPTOS: cluster, nodo</p>
+<p>RECURSO del API: pod</p>
+<p>Cuando despliegan k8s obtienen un cluster</p>
+<p>Un cluster es un conjunto de máquinas llamadas <strong>nodos</strong>, que corren aplicaciones containerizadas y que son administradas por k8s.</p>
+<p>Un cluster tiene por lo menos un nodo trabajador y un nodo maestro.</p>
+<p>Los nodos trabajadores abergan los <strong>pods</strong> que son los componentes de la aplicación.</p>
+<p>Los nodos maestro administran</p>
+<ul>
+<li>los nodos trabajadores</li>
+<li>los pods en el cluster</li>
+</ul>
+<p>Con múltiples nodos amestros se consigue conmutación por error y alta disponibilidad del cluster.</p>
+</aside></section><section id="componentes-del-nodo-maestro" class="title-slide slide level2"><h2>Componentes del Nodo Maestro</h2><ul>
+<li>Decisiones globales del cluster</li>
+<li>Detectan y responden a eventos del cluster</li>
+<li>Sus componentes pueden arrancar en cualquier nodo</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>scripts por defecto
+<ul>
+<li>los arrancan en el mismo nodo</li>
+<li>impiden ejecución de pods de usuarios</li>
+</ul></li>
+</ul>
+</aside></section><section id="kube-api-server" class="title-slide slide level3"><h3>kube API Server</h3></section><section id="etcd" class="title-slide slide level3"><h3>etcd</h3></section><section id="kube-scheduler" class="title-slide slide level3"><h3>kube-scheduler</h3></section><section id="kube-controller-manager" class="title-slide slide level3"><h3>kube controller manager</h3></section><section id="cloud-manager" class="title-slide slide level3"><h3>cloud manager</h3></section><section id="componentes-de-los-nodos-trabajadores" class="title-slide slide level2"><h2>Componentes de los Nodos Trabajadores</h2></section><section id="kubelet" class="title-slide slide level3"><h3>kubelet</h3></section><section id="kube-proxy" class="title-slide slide level3"><h3>kube proxy</h3><ul>
+<li>Enruta el tráfico de red hacia servicios con balanceadores de carga en el cluster</li>
+<li>Presente en cada nodo del cluster
+<ul>
+<li>Usualmente corre como un <strong>DaemonSet</strong></li>
+</ul></li>
+</ul></section><section id="container-runtime" class="title-slide slide level3"><h3>Container Runtime</h3><ul>
+<li>asd</li>
+</ul></section><section id="complementos" class="title-slide slide level2"><h2>Complementos</h2></section><section id="dns" class="title-slide slide level3"><h3>DNS</h3><ul>
+<li>Provee nombramiento y descubrimiento de los servicios definidos en el cluster</li>
+<li>Dependiendo del tamaño del cluster se pueden encontrar uno o más corriendo
+<ul>
+<li>Usualmente corre como un <strong>Deployment</strong></li>
+<li>Usa un <strong>Service</strong> para balancear la carga entre las instancias del servidor de DNS</li>
+</ul></li>
+<li>La ip del <strong>Service</strong> se encuentra en el archivo <code>/etc/resolv.conf</code> de cada contenedor que se ejecuta en el cluster</li>
+</ul></section><section id="web-ui" class="title-slide slide level3"><h3>Web UI</h3><ul>
+<li>Corre una única replica de <strong>Deployment</strong> y usa un <strong>Service</strong> para estar disponible desde el cluster</li>
+<li>Puede ser accedido usando <code>$ kubectl proxy</code></li>
+<li>No siempre se instala</li>
+</ul></section><section id="container-resource-monitoring" class="title-slide slide level3"><h3>Container Resource Monitoring</h3></section><section id="cluster-level-logging" class="title-slide slide level3"><h3>Cluster Level Logging</h3></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2><pre class="bash"><code>$ kubectl version
 $ kubectl get componentstatuses</code></pre>
 <aside class="notes">
 <p>Versiones</p>
@@ -213,16 +269,9 @@ $ kubectl get componentstatuses</code></pre>
 <li><strong>scheduler</strong>: asocia diferentes pods en diferentes nodos del cluster</li>
 <li><strong>etcd</strong>: almacenamiento de todos los objetos del API</li>
 </ul>
-</aside></section><section id="nodos-worker" class="title-slide slide level3"><h3>Nodos Worker</h3><pre class="bash"><code>$ kubectl get nodes</code></pre>
-<ul>
-<li><strong>nodos master</strong>: donde los contenedores centrales del cluster se ejecutan
-<ul>
-<li>server API: servidor del API</li>
-<li>scheduler: calendarizador</li>
-</ul></li>
-<li><strong>nodos worker</strong>: donde los contenedores de aplicación se ejecutan</li>
-</ul>
-<pre class="bash"><code>$ kubectl describe nodes node-1</code></pre>
+</aside></section><section id="nodos-worker" class="title-slide slide level3"><h3>Nodos Worker</h3><pre class="bash"><code>$ kubectl get nodes
+$ kubectl describe nodes node-1</code></pre>
+<aside class="notes">
 <ul>
 <li>muestra información sobre
 <ul>
@@ -246,25 +295,8 @@ $ kubectl get componentstatuses</code></pre>
 </ul></li>
 <li>Pods que corren actualmente</li>
 </ul></li>
-</ul></section><section id="componentes-del-cluster" class="title-slide slide level2"><h2>Componentes del Cluster</h2><p>Los siguientes componentes corren en el namespace <strong>kube-system</strong>.</p></section><section id="kubernetes-proxy" class="title-slide slide level3"><h3>Kubernetes Proxy</h3><ul>
-<li>Enruta el tráfico de red hacia servicios con balanceadores de carga en el cluster</li>
-<li>Presente en cada nodo del cluster
-<ul>
-<li>Usualmente corre como un <strong>DaemonSet</strong></li>
-</ul></li>
-</ul></section><section id="kubernetes-dns" class="title-slide slide level3"><h3>Kubernetes DNS</h3><ul>
-<li>Provee nombramiento y descubrimiento de los servicios definidos en el cluster</li>
-<li>Dependiendo del tamaño del cluster se pueden encontrar uno o más corriendo
-<ul>
-<li>Usualmente corre como un <strong>Deployment</strong></li>
-<li>Usa un <strong>Service</strong> para balancear la carga entre las instancias del servidor de DNS</li>
-</ul></li>
-<li>La ip del <strong>Service</strong> se encuentra en el archivo <code>/etc/resolv.conf</code> de cada contenedor que se ejecuta en el cluster</li>
-</ul></section><section id="kubernetes-ui" class="title-slide slide level3"><h3>Kubernetes UI</h3><ul>
-<li>Corre una única replica de <strong>Deployment</strong> y usa un <strong>Service</strong> para estar disponible desde el cluster</li>
-<li>Puede ser accedido usando <code>$ kubectl proxy</code></li>
-<li>No siempre se instala</li>
-</ul></section></section>
+</ul>
+</aside></section></section>
 <section><section id="algunos-recursos-del-api" class="title-slide slide level1"><h1>Algunos Recursos del API</h1></section><section id="recursos" class="title-slide slide level2"><h2>Recursos</h2></section><section id="namespaces" class="title-slide slide level3"><h3>Namespaces</h3><ul>
 <li>Organiza objetos en el cluster (como carpetas)
 <ul>
@@ -428,6 +460,7 @@ $ kubectl help | less</code></pre></section></section>
 <li><a href="https://www.cncf.io/phippy-goes-to-the-zoo-book/">CNCF: A Kubernetes story</a></li>
 <li><a href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/">Kubernetes.io</a></li>
 <li><a href="https://www.opencontainers.org/">OCI</a></li>
+<li><a href="https://cloud.google.com/blog/products/gcp/bringing-pokemon-go-to-life-on-google-cloud">Bringing Pokemon GO to life on gcp</a></li>
 </ul></section></section>
     </div>
   </div>
