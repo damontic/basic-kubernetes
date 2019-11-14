@@ -165,9 +165,7 @@ creo que a medida que k8s evolucione va a cubrir más y más los procesos de dev
 
 :::
 
-# Arquitectura de Kubernetes
-
-## Ejemplo de Usuarios y Procesos
+## Tipos de Usuarios y Procesos
 
 - **operadores**
   - instalación
@@ -185,6 +183,8 @@ los operadores idealmente conocen las entrañas de k8s
 usuarios finales ni saben que interactúan con kubernetes: pokemon go
 
 :::
+
+# Arquitectura de Kubernetes
 
 ## Componentes
 
