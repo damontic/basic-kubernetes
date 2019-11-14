@@ -3,17 +3,6 @@ title: Kubernetes Basics
 author: David Alberto Montaño Fetecua
 ---
 
-# Agenda
-
-- Contexto
-- ¿Qué es Kubernetes?
-- Arquitectura de Kubernetes
-- Algunos Recursos del API
-- Algunos Comandos
-- Siguientes Pasos
-
-# Contexto
-
 ## Objetivos
 
 - Entender beneficios de usar Kubernetes
@@ -29,6 +18,17 @@ author: David Alberto Montaño Fetecua
   - microservicios que se comunican por APIs REST
 
 :::
+
+# Agenda
+
+- Contexto
+- ¿Qué es Kubernetes?
+- Arquitectura de Kubernetes
+- Algunos Recursos del API
+- Algunos Comandos
+- Siguientes Pasos
+
+# Contexto
 
 ## Escenarios Diferentes
 
