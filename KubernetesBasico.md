@@ -80,7 +80,7 @@ intentos: docker swarm, machine, compose
 
 <img src="images/kubernetes.svg" style="zoom:50%;" />
 
-- ***Plataforma de administración de aplicaciones y servicios "containerizados" (OCI)***
+- ***Plataforma de administración de aplicaciones y servicios "containerizados" (CRI)***
   - **código abierto**
   - **configuración declarativa** de estado y comportamiento
   - facilita instalación y monitoreo de **aplicaciones distribuidas**
@@ -91,6 +91,11 @@ Open Container Iniciative
 
 - runtime specification
 - image specification
+
+Container Runtime Interface
+
+- API que usa protocol buffers y gRPC
+- docker - CRI-O - containerd - frakti
 
 :::
 
@@ -233,15 +238,53 @@ Con múltiples nodos maestros se consigue conmutación por error y alta disponib
 - etcd
 - kube scheduler
 - kube controller manager
+  - Node - Replication - Endpoint - Service Account and Token
 - cloud manager
+  - Node - Route - Service - Volume
 
 ::: notes
 
-- kube api server
-- etcd
-- kube scheduler
-- kube controller manager
-- cloud manager
+**kube api server**
+
+Escala horizontalmente, con varias instancias se balancea el tráfico de peticiones
+
+**etcd**
+
+datos del cluster - para recuprar ante fallos pensar en respaldo
+
+**kube scheduler**
+
+selecciona en qué nodos ejecutar nuevas tareas o pods
+
+factores usados en decisión:
+
+- requerimientos individuales y colectivos de recursos, restricciones de hardware/software/políticas, especificaciones de afinidad y anti afinidad,...
+
+**kube controller manager**
+
+controladores son procesos únicos en binario único
+
+These controllers include:
+
+- Node Controller: se da cuenta cuando un nodo está bien o mal
+- Replication Controller: mantiene número correcto de pods
+- Endpoints Controller: Une pods y servicios
+- Service Account & Token Controllers: crea cuentas por defecto y token de acceso al API para nuevos namespaces
+
+**cloud manager**
+
+runs controllers that interact with the underlying cloud providers. The cloud-controller-manager binary is an alpha feature introduced in Kubernetes release 1.6.
+
+cloud-controller-manager runs cloud-provider-specific controller loops only. You must disable these controller loops in the kube-controller-manager. You can disable the controller loops by setting the `--cloud-provider` flag to `external` when starting the kube-controller-manager.
+
+cloud-controller-manager allows the cloud vendor’s code and the Kubernetes code to evolve independently of each other. In prior releases, the core Kubernetes code was dependent upon cloud-provider-specific code for functionality. In future releases, code specific to cloud vendors should be maintained by the cloud vendor themselves, and linked to cloud-controller-manager while running Kubernetes.
+
+The following controllers have cloud provider dependencies:
+
+- Node Controller: revisa si nodo dejó de correr en nube específica
+- Route Controller: configura rutas en la infraestructura de red subyacente
+- Service Controller: crear, actualizar y borrar balanceadores de carga en la nube
+- Volume Controller: crear, asociar y montar volúmenes e interactuar con el proveedor de nube para orquestrarlos
 
 :::
 
@@ -253,46 +296,60 @@ Con múltiples nodos maestros se consigue conmutación por error y alta disponib
 
 ::: notes
 
-kubelet
+**kubelet**
 
-kube proxy
+Agente que corre en cada nodo del cluster. DaemonSet
 
-- Enruta el tráfico de red hacia servicios con balanceadores de carga en el cluster
-- Presente en cada nodo del cluster
-  - Usualmente corre como un **DaemonSet**
+Se asegura de que los contenedores que componen un pod están bien
 
-Container Runtime
+toma un conjunto de PodSpecs y se asegura que están corriendo y sanos.
 
-- asd
+no controla contenedores que no fueron creados desde k8s
+
+**kube proxy**
+
+proxy de red que corre en cada nodo (DaemonSet)
+
+mantiene reglas de red en los nodos. permiten comunicación con componentes internos o externos al cluster
+
+**Container Runtime**
+
+software responsable de correr contenedores
+
+[Docker](http://www.docker.com/), [containerd](https://containerd.io/), [cri-o](https://cri-o.io/), [rktlet](https://github.com/kubernetes-incubator/rktlet), frakti
+
+[Kubernetes CRI (Container Runtime Interface)](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md).
 
 :::
 
-## Componentes adicionales
+## [Componentes adicionales](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons)
 
-- DNS
-- web ui
-- container resource monitoring
-- cluster level logging
+- Redes y Políticas de Red
+  - Calico - Flannel - Canal - ...
+- Descubrimiento de Servicios
+  - CoreDNS
+- Control y Visualización
+  - Dashboard
+- Infraestructura
+  - KubeVirt
 
 ::: notes
 
-DNS
+Usan recursos de k8s como ([DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset), [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), etc) para implementar características del cluster.
 
-- Provee nombramiento y descubrimiento de los servicios definidos en el cluster
-- Dependiendo del tamaño del cluster se pueden encontrar uno o más corriendo
-  - Usualmente corre como un **Deployment**
-  - Usa un **Service** para balancear la carga entre las instancias del servidor de DNS
-- La ip del **Service** se encuentra en el archivo `/etc/resolv.conf` de cada contenedor que se ejecuta en el cluster
+Como son características del cluster se crean en el namespace `kube-system`.
 
-Web UI
+**DNS**
 
-- Corre una única replica de **Deployment** y usa un **Service** para estar disponible desde el cluster
-- Puede ser accedido usando `$ kubectl proxy`
-- No siempre se instala
+Todos los clustes necesitan un [cluster DNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
 
-Container Resource Monitoring
+Sirve entradas de DNS para los servicios de Kubernetes.
 
-Cluster Level Logging
+Los Containers que arrancan dentro de Kubernetes incluyen este servidor DNS en sus búsquedas.
+
+**Web UI**
+
+administrar y entender problemas de aplicaciones que corren en el cluster y del mismo cluster
 
 :::
 

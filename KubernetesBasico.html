@@ -88,7 +88,7 @@
 <p>intentos: docker swarm, machine, compose</p>
 </aside></section><section id="kubernetes" class="title-slide slide level2"><h2>Kubernetes</h2><p><img src="images/kubernetes.svg" style="zoom:50%;" /></p>
 <ul>
-<li><strong><em>Plataforma de administración de aplicaciones y servicios “containerizados” (OCI)</em></strong>
+<li><strong><em>Plataforma de administración de aplicaciones y servicios “containerizados” (CRI)</em></strong>
 <ul>
 <li><strong>código abierto</strong></li>
 <li><strong>configuración declarativa</strong> de estado y comportamiento</li>
@@ -100,6 +100,11 @@
 <ul>
 <li>runtime specification</li>
 <li>image specification</li>
+</ul>
+<p>Container Runtime Interface</p>
+<ul>
+<li>API que usa protocol buffers y gRPC</li>
+<li>docker - CRI-O - containerd - frakti</li>
 </ul>
 </aside></section><section id="beneficios" class="title-slide slide level2"><h2>Beneficios</h2><ul>
 <li>velocidad</li>
@@ -221,16 +226,45 @@
 <li>kube api server</li>
 <li>etcd</li>
 <li>kube scheduler</li>
-<li>kube controller manager</li>
-<li>cloud manager</li>
+<li>kube controller manager
+<ul>
+<li>Node - Replication - Endpoint - Service Account and Token</li>
+</ul></li>
+<li>cloud manager
+<ul>
+<li>Node - Route - Service - Volume</li>
+</ul></li>
 </ul>
 <aside class="notes">
+<p><strong>kube api server</strong></p>
+<p>Escala horizontalmente, con varias instancias se balancea el tráfico de peticiones</p>
+<p><strong>etcd</strong></p>
+<p>datos del cluster - para recuprar ante fallos pensar en respaldo</p>
+<p><strong>kube scheduler</strong></p>
+<p>selecciona en qué nodos ejecutar nuevas tareas o pods</p>
+<p>factores usados en decisión:</p>
 <ul>
-<li>kube api server</li>
-<li>etcd</li>
-<li>kube scheduler</li>
-<li>kube controller manager</li>
-<li>cloud manager</li>
+<li>requerimientos individuales y colectivos de recursos, restricciones de hardware/software/políticas, especificaciones de afinidad y anti afinidad,…</li>
+</ul>
+<p><strong>kube controller manager</strong></p>
+<p>controladores son procesos únicos en binario único</p>
+<p>These controllers include:</p>
+<ul>
+<li>Node Controller: se da cuenta cuando un nodo está bien o mal</li>
+<li>Replication Controller: mantiene número correcto de pods</li>
+<li>Endpoints Controller: Une pods y servicios</li>
+<li>Service Account &amp; Token Controllers: crea cuentas por defecto y token de acceso al API para nuevos namespaces</li>
+</ul>
+<p><strong>cloud manager</strong></p>
+<p>runs controllers that interact with the underlying cloud providers. The cloud-controller-manager binary is an alpha feature introduced in Kubernetes release 1.6.</p>
+<p>cloud-controller-manager runs cloud-provider-specific controller loops only. You must disable these controller loops in the kube-controller-manager. You can disable the controller loops by setting the <code>--cloud-provider</code> flag to <code>external</code> when starting the kube-controller-manager.</p>
+<p>cloud-controller-manager allows the cloud vendor’s code and the Kubernetes code to evolve independently of each other. In prior releases, the core Kubernetes code was dependent upon cloud-provider-specific code for functionality. In future releases, code specific to cloud vendors should be maintained by the cloud vendor themselves, and linked to cloud-controller-manager while running Kubernetes.</p>
+<p>The following controllers have cloud provider dependencies:</p>
+<ul>
+<li>Node Controller: revisa si nodo dejó de correr en nube específica</li>
+<li>Route Controller: configura rutas en la infraestructura de red subyacente</li>
+<li>Service Controller: crear, actualizar y borrar balanceadores de carga en la nube</li>
+<li>Volume Controller: crear, asociar y montar volúmenes e interactuar con el proveedor de nube para orquestrarlos</li>
 </ul>
 </aside></section><section id="componentes-de-los-nodos-trabajadores" class="title-slide slide level2"><h2>Componentes de los Nodos Trabajadores</h2><ul>
 <li>kubelet</li>
@@ -238,44 +272,45 @@
 <li>container runtime</li>
 </ul>
 <aside class="notes">
-<p>kubelet</p>
-<p>kube proxy</p>
+<p><strong>kubelet</strong></p>
+<p>Agente que corre en cada nodo del cluster. DaemonSet</p>
+<p>Se asegura de que los contenedores que componen un pod están bien</p>
+<p>toma un conjunto de PodSpecs y se asegura que están corriendo y sanos.</p>
+<p>no controla contenedores que no fueron creados desde k8s</p>
+<p><strong>kube proxy</strong></p>
+<p>proxy de red que corre en cada nodo (DaemonSet)</p>
+<p>mantiene reglas de red en los nodos. permiten comunicación con componentes internos o externos al cluster</p>
+<p><strong>Container Runtime</strong></p>
+<p>software responsable de correr contenedores</p>
+<p><a href="http://www.docker.com/">Docker</a>, <a href="https://containerd.io/">containerd</a>, <a href="https://cri-o.io/">cri-o</a>, <a href="https://github.com/kubernetes-incubator/rktlet">rktlet</a>, frakti</p>
+<p><a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md">Kubernetes CRI (Container Runtime Interface)</a>.</p>
+</aside></section><section id="componentes-adicionales" class="title-slide slide level2"><h2><a href="https://github.com/kubernetes/kubernetes/tree/master/cluster/addons">Componentes adicionales</a></h2><ul>
+<li>Redes y Políticas de Red
 <ul>
-<li>Enruta el tráfico de red hacia servicios con balanceadores de carga en el cluster</li>
-<li>Presente en cada nodo del cluster
-<ul>
-<li>Usualmente corre como un <strong>DaemonSet</strong></li>
+<li>Calico - Flannel - Canal - …</li>
 </ul></li>
-</ul>
-<p>Container Runtime</p>
+<li>Descubrimiento de Servicios
 <ul>
-<li>asd</li>
-</ul>
-</aside></section><section id="componentes-adicionales" class="title-slide slide level2"><h2>Componentes adicionales</h2><ul>
-<li>DNS</li>
-<li>web ui</li>
-<li>container resource monitoring</li>
-<li>cluster level logging</li>
+<li>CoreDNS</li>
+</ul></li>
+<li>Control y Visualización
+<ul>
+<li>Dashboard</li>
+</ul></li>
+<li>Infraestructura
+<ul>
+<li>KubeVirt</li>
+</ul></li>
 </ul>
 <aside class="notes">
-<p>DNS</p>
-<ul>
-<li>Provee nombramiento y descubrimiento de los servicios definidos en el cluster</li>
-<li>Dependiendo del tamaño del cluster se pueden encontrar uno o más corriendo
-<ul>
-<li>Usualmente corre como un <strong>Deployment</strong></li>
-<li>Usa un <strong>Service</strong> para balancear la carga entre las instancias del servidor de DNS</li>
-</ul></li>
-<li>La ip del <strong>Service</strong> se encuentra en el archivo <code>/etc/resolv.conf</code> de cada contenedor que se ejecuta en el cluster</li>
-</ul>
-<p>Web UI</p>
-<ul>
-<li>Corre una única replica de <strong>Deployment</strong> y usa un <strong>Service</strong> para estar disponible desde el cluster</li>
-<li>Puede ser accedido usando <code>$ kubectl proxy</code></li>
-<li>No siempre se instala</li>
-</ul>
-<p>Container Resource Monitoring</p>
-<p>Cluster Level Logging</p>
+<p>Usan recursos de k8s como (<a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset">DaemonSet</a>, <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, etc) para implementar características del cluster.</p>
+<p>Como son características del cluster se crean en el namespace <code>kube-system</code>.</p>
+<p><strong>DNS</strong></p>
+<p>Todos los clustes necesitan un <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">cluster DNS</a></p>
+<p>Sirve entradas de DNS para los servicios de Kubernetes.</p>
+<p>Los Containers que arrancan dentro de Kubernetes incluyen este servidor DNS en sus búsquedas.</p>
+<p><strong>Web UI</strong></p>
+<p>administrar y entender problemas de aplicaciones que corren en el cluster y del mismo cluster</p>
 </aside></section></section>
 <section><section id="algunos-recursos-del-api" class="title-slide slide level1"><h1>Algunos Recursos del API</h1></section><section class="slide level4">
 
