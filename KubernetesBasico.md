@@ -433,7 +433,6 @@ $ eksctl create cluster --name s4n ...
 ```bash
 $ doctl kubernetes cluster list
 $ doctl kubernetes cluster kubeconfig save s4n
-$ kubectl get nodes
 ```
 
 ### Máquina local
