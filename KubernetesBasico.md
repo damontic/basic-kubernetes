@@ -34,19 +34,6 @@ author: David Alberto Montaño Fetecua
 
 ![](images/container_evolution.svg)
 
-## ¿Qué tecnología aprendo ahora?
-
-<img src="images/scenarios.svg" style="zoom:50%;" />
-
-::: notes
-
-- **Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo** (Windows Services, init.d, upstart, systemctl)
-  - Máquinas Físicas
-  - Máquinas Virtuales
-- **Aplicaciones Containerizadas** (estándar OCI, docker, rkt, podman, buildah, containerd)
-
-:::
-
 ## Procesos de DevOps
 
 - Despliegues - Rollbacks
@@ -91,7 +78,7 @@ intentos: docker swarm, machine, compose
 
 ## Kubernetes
 
-<img src="images/originals/kubernetes.svg" style="zoom:50%;" />
+<img src="images/kubernetes.svg" style="zoom:50%;" />
 
 - ***Plataforma de administración de aplicaciones y servicios "containerizados" (OCI)***
   - **código abierto**
