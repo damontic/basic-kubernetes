@@ -476,13 +476,12 @@ $ kubectl --all-namespaces get pods
   ```
 
   - algunos comandos externos actualizan el archivo `$HOME/.kube/config`. ¡SEA CONSCIENTE DE ELLO!
-    - helm
-    - ranchercli
-    - gcloud
-    - doctl
-    - minikube
-    - az
-    - eksctl
+
+  | Command that updates kubectl config | Command that updates kubectl config | Command that updates kubectl config |
+  | ----------------------------------- | ----------------------------------- | ----------------------------------- |
+  | helm                                | ranchercli                          | gcloud                              |
+  | doctl                               | minikube                            | az                                  |
+  | eksctl                              |                                     |                                     |
 
 ## Interactuar con Objetos del API de Kubernetes
 
@@ -503,20 +502,6 @@ $ kubectl apply -f obj.yaml
 $ kubectl edit <resource-name> <obj-name> # after saving it is automatically updated
 $ kubectl delete -f obj.yaml
 $ kubectl delete <resource-name> <obj-name>
-```
-
-### Etiquetando y anotando Objetos
-
-```bash
-$ kubectl label pods checkin project=airline
-$ kubectl label pods checkin project=airline2 --overwrite
-$ kubectl label pods checkin project- # delete the label
-```
-
-```bash
-$ kubectl annotate pods checkin project=airline
-$ kubectl annotate pods checkin project=airline2 --overwrite
-$ kubectl annotate pods checkin project- # delete the annotation
 ```
 
 ### Comandos de Debugging
@@ -577,19 +562,15 @@ $ kubectl help | less
 
 ## Kubernetes Ingresses Controllers
 
-- Nginx
-- Kong
-- Ambassador (API Gateway based on Envoy)
-- Voyager (HaProxy)
-- AWS ALB Ingress controller
-- Contour (Envoy)
-- Citrix
-- F5
-- Gloo
-- HaProxy
-- Istio (Envoy)
-- Skipper
-- Traefik
+| Ingress Controllers                     | Ingress Controllers |
+| --------------------------------------- | ------------------- |
+| Nginx                                   | Kong                |
+| Ambassador (API Gateway based on Envoy) | Voyager (HaProxy)   |
+| AWS ALB Ingress controller              | Contour (Envoy)     |
+| Citrix                                  | F5                  |
+| Gloo                                    | HaProxy             |
+| Istio (Envoy)                           | Skipper             |
+| Traefik                                 |                     |
 
 ## CD Pipelines
 

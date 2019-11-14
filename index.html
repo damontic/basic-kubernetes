@@ -392,17 +392,39 @@ $ kubectl --all-namespaces get pods</code></pre></section><section id="contexts"
 <pre class="bash"><code>$ kubectl config set-context my-context --namespace=my-namespace
 $ kubectl config use-context my-context</code></pre>
 <ul>
-<li>algunos comandos externos actualizan el archivo <code>$HOME/.kube/config</code>. ¡SEA CONSCIENTE DE ELLO!
-<ul>
-<li>helm</li>
-<li>ranchercli</li>
-<li>gcloud</li>
-<li>doctl</li>
-<li>minikube</li>
-<li>az</li>
-<li>eksctl</li>
-</ul></li>
-</ul></li>
+<li>algunos comandos externos actualizan el archivo <code>$HOME/.kube/config</code>. ¡SEA CONSCIENTE DE ELLO!</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command that updates kubectl config</th>
+<th>Command that updates kubectl config</th>
+<th>Command that updates kubectl config</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>helm</td>
+<td>ranchercli</td>
+<td>gcloud</td>
+</tr>
+<tr class="even">
+<td>doctl</td>
+<td>minikube</td>
+<td>az</td>
+</tr>
+<tr class="odd">
+<td>eksctl</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></li>
 </ul></section><section id="interactuar-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuar con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
 $ kubectl describe &lt;resource-name&gt; &lt;obj-name&gt;</code></pre></section><section id="crear-actualizar-y-destruir-objetos-de-k8s" class="title-slide slide level3"><h3>Crear, Actualizar y Destruir Objetos de K8s</h3><pre class="bash"><code>$ kubectl apply -f obj.yaml
 $ vi obj.yaml # update some resources
@@ -410,12 +432,7 @@ $ kubectl apply --dry-run -f obj.yaml # output the changes without making them
 $ kubectl apply -f obj.yaml
 $ kubectl edit &lt;resource-name&gt; &lt;obj-name&gt; # after saving it is automatically updated
 $ kubectl delete -f obj.yaml
-$ kubectl delete &lt;resource-name&gt; &lt;obj-name&gt;</code></pre></section><section id="etiquetando-y-anotando-objetos" class="title-slide slide level3"><h3>Etiquetando y anotando Objetos</h3><pre class="bash"><code>$ kubectl label pods checkin project=airline
-$ kubectl label pods checkin project=airline2 --overwrite
-$ kubectl label pods checkin project- # delete the label</code></pre>
-<pre class="bash"><code>$ kubectl annotate pods checkin project=airline
-$ kubectl annotate pods checkin project=airline2 --overwrite
-$ kubectl annotate pods checkin project- # delete the annotation</code></pre></section><section id="comandos-de-debugging" class="title-slide slide level3"><h3>Comandos de Debugging</h3><pre class="bash"><code>$ kubectl top nodes
+$ kubectl delete &lt;resource-name&gt; &lt;obj-name&gt;</code></pre></section><section id="comandos-de-debugging" class="title-slide slide level3"><h3>Comandos de Debugging</h3><pre class="bash"><code>$ kubectl top nodes
 $ kubectl logs &lt;pod-name&gt;
 $ kubectl exec -ti exec &lt;pod-name&gt; -- bash
 $ kubectl attach -it &lt;pod-name&gt;
@@ -451,21 +468,44 @@ $ kubectl help | less</code></pre></section></section>
 <li>tectonic + Open Shift</li>
 <li>rancher</li>
 <li>costs comparison</li>
-</ul></section><section id="kubernetes-ingresses-controllers" class="title-slide slide level2"><h2>Kubernetes Ingresses Controllers</h2><ul>
-<li>Nginx</li>
-<li>Kong</li>
-<li>Ambassador (API Gateway based on Envoy)</li>
-<li>Voyager (HaProxy)</li>
-<li>AWS ALB Ingress controller</li>
-<li>Contour (Envoy)</li>
-<li>Citrix</li>
-<li>F5</li>
-<li>Gloo</li>
-<li>HaProxy</li>
-<li>Istio (Envoy)</li>
-<li>Skipper</li>
-<li>Traefik</li>
-</ul></section><section id="cd-pipelines" class="title-slide slide level2"><h2>CD Pipelines</h2><ul>
+</ul></section><section id="kubernetes-ingresses-controllers" class="title-slide slide level2"><h2>Kubernetes Ingresses Controllers</h2><table>
+<thead>
+<tr class="header">
+<th>Ingress Controllers</th>
+<th>Ingress Controllers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nginx</td>
+<td>Kong</td>
+</tr>
+<tr class="even">
+<td>Ambassador (API Gateway based on Envoy)</td>
+<td>Voyager (HaProxy)</td>
+</tr>
+<tr class="odd">
+<td>AWS ALB Ingress controller</td>
+<td>Contour (Envoy)</td>
+</tr>
+<tr class="even">
+<td>Citrix</td>
+<td>F5</td>
+</tr>
+<tr class="odd">
+<td>Gloo</td>
+<td>HaProxy</td>
+</tr>
+<tr class="even">
+<td>Istio (Envoy)</td>
+<td>Skipper</td>
+</tr>
+<tr class="odd">
+<td>Traefik</td>
+<td></td>
+</tr>
+</tbody>
+</table></section><section id="cd-pipelines" class="title-slide slide level2"><h2>CD Pipelines</h2><ul>
 <li>Jenkins X</li>
 <li>Spinnaker</li>
 <li>Tekton</li>
