@@ -50,6 +50,16 @@ author: David Alberto Montaño Fetecua
 
 :::
 
+## Abstracciones
+
+> The essence of abstractions is preserving information that is relevant in a given context, and forgetting information that is irrelevant in that context.
+>
+> – John V. Guttag
+
+- interfaces de programación - APIs
+- Sistema Operativo
+- Docker
+
 # ¿Qué es Kubernetes?
 
 ## Kubernetes
@@ -122,18 +132,11 @@ Eficiencia
 - No limita el tipo de aplicación
 - No obtiene código fuente ni construye aplicciones
 - No provee servicios de nivel de aplicación
+  - buses, bases de datos, cachés
 - No obliga a usar aplicaciones de monitoreo, logging o alerta
-- No obliga a usar un lenguaje específico
-- No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.
-- No es un sistema de orquestración pues no tiene centro de control
 
-::: notes
+## ¿Qué cosas no hace K8s?
 
-- No limita el tipo de aplicación
-- No obtiene código fuente ni construye aplicciones
-- No provee servicios de nivel de aplicación
-  - como buses, bases de datos, cachés
-- No obliga a usar aplicaciones de monitoreo, logging o alerta
 - No obliga a usar un lenguaje específico
 - No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.
 - No es un sistema de orquestración pues no tiene centro de control
@@ -141,8 +144,6 @@ Eficiencia
   - robusto
   - resiliente
   - extensible
-
-:::
 
 # Arquitectura de Kubernetes
 

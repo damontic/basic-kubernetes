@@ -67,7 +67,15 @@
 </ul></li>
 <li><strong>Aplicaciones Containerizadas</strong> (estándar OCI, docker, rkt, podman, buildah, containerd)</li>
 </ul>
-</aside></section></section>
+</aside></section><section id="abstracciones" class="title-slide slide level2"><h2>Abstracciones</h2><blockquote>
+<p>The essence of abstractions is preserving information that is relevant in a given context, and forgetting information that is irrelevant in that context.</p>
+<p>– John V. Guttag</p>
+</blockquote>
+<ul>
+<li>interfaces de programación - APIs</li>
+<li>Sistema Operativo</li>
+<li>Docker</li>
+</ul></section></section>
 <section><section id="qué-es-kubernetes" class="title-slide slide level1"><h1>¿Qué es Kubernetes?</h1></section><section id="kubernetes" class="title-slide slide level2"><h2>Kubernetes</h2><p><img src="images/originals/kubernetes.svg" style="zoom:50%;" /></p>
 <ul>
 <li><strong><em>Plataforma de administración de aplicaciones y servicios “containerizados”</em></strong>
@@ -134,21 +142,12 @@
 </ul></section><section id="qué-cosas-no-hace-k8s" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
 <li>No limita el tipo de aplicación</li>
 <li>No obtiene código fuente ni construye aplicciones</li>
-<li>No provee servicios de nivel de aplicación</li>
-<li>No obliga a usar aplicaciones de monitoreo, logging o alerta</li>
-<li>No obliga a usar un lenguaje específico</li>
-<li>No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.</li>
-<li>No es un sistema de orquestración pues no tiene centro de control</li>
-</ul>
-<aside class="notes">
-<ul>
-<li>No limita el tipo de aplicación</li>
-<li>No obtiene código fuente ni construye aplicciones</li>
 <li>No provee servicios de nivel de aplicación
 <ul>
-<li>como buses, bases de datos, cachés</li>
+<li>buses, bases de datos, cachés</li>
 </ul></li>
 <li>No obliga a usar aplicaciones de monitoreo, logging o alerta</li>
+</ul></section><section id="qué-cosas-no-hace-k8s-1" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
 <li>No obliga a usar un lenguaje específico</li>
 <li>No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.</li>
 <li>No es un sistema de orquestración pues no tiene centro de control
@@ -158,8 +157,7 @@
 <li>resiliente</li>
 <li>extensible</li>
 </ul></li>
-</ul>
-</aside></section></section>
+</ul></section></section>
 <section><section id="arquitectura-de-kubernetes" class="title-slide slide level1"><h1>Arquitectura de Kubernetes</h1></section><section id="componentes" class="title-slide slide level2"><h2>Componentes</h2><p><img data-src="images/components-of-kubernetes.png" /></p></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2></section><section id="versiones" class="title-slide slide level3"><h3>Versiones</h3><pre class="bash"><code>$ kubectl version</code></pre>
 <ul>
 <li>Mantenerse entre dos versiones menores de distancia</li>
