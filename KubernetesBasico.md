@@ -163,33 +163,20 @@ Eficiencia
 
 creo que a medida que k8s evolucione va a cubrir más y más los procesos de devops
 
-:::
-
-## ¿Qué cosas no hace K8s?
+¿Qué cosas no hace K8s?
 
 - No limita el tipo de aplicación
 - No provee servicios de nivel de aplicación
   - buses, bases de datos, cachés
 - No obliga a usar tecnologías específicas de monitoreo, logging o alerta
 - No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.
-
-::: notes
-
-No obtiene código fuente ni construye aplicaciones
-
-- aunque tecnologías como Tekton lo permiten
-
-:::
-
-## ¿Qué cosas no hace K8s?
-
 - No obtiene código fuente ni construye aplicaciones
+  - aunque tecnologías como Tekton lo permiten
+
 - No obliga a usar un lenguaje específico
 - No es un sistema de orquestración pues no tiene centro de control
-  - poderozo
-  - robusto
-  - resiliente
-  - extensible
+
+:::
 
 # Arquitectura de Kubernetes
 
@@ -322,110 +309,25 @@ Cluster Level Logging
 
 :::
 
-## Cliente de Kubernetes
-
-```bash
-$ kubectl version
-$ kubectl get componentstatuses
-```
-
-::: notes
-
-Versiones
-
-- Mantenerse entre dos versiones menores de distancia
-- No usar nuevas características en clusters viejos
-
-Estados de los componentes
-
-- **controller manager**: controladores regulan el comportamiento del cluster
-- **scheduler**: asocia diferentes pods en diferentes nodos del cluster
-- **etcd**: almacenamiento de todos los objetos del API
-
-:::
-
-### Nodos Worker
-
-```bash
-$ kubectl get nodes
-$ kubectl describe nodes node-1
-```
-
-::: notes
-
-- muestra información sobre
-  - nodo
-    - Os running
-    - architecture
-    - hostname
-  - operación
-    - Disk usage
-    - Memory Usage
-  - capacidad
-    - Total Memory
-    - Total CPU
-    - GPU info
-    - Pods
-  - Pods que corren actualmente
-
-:::
-
 # Algunos Recursos del API
 
-## Recursos
+## Services
 
-### Namespaces
+## Pods
 
-- Organiza objetos en el cluster (como carpetas)
-  - si no se configura **kubectl** este interactúa por defecto con el namespace **defaut**
+## Ingress
 
-```bash
-$ kubectl -n anothernamespace get pods
-$ kubectl --all-namespaces get pods
-```
+## ReplicaSets
 
-### Contexts
+## Deployments
 
-- Cada contexto es un cluster de K8s diferente o un namespace de un cluster diferente
+## DaemonSets
 
-- La lista de contextos y su configuración se guarda en el archivo `$HOME/.kube/config`
+## Jobs
 
-- Se puede listar, crear, actualizar y borrarlos contextos de dos formas:
+## ConfigMaps
 
-  - actualizando el archivo `$HOME/.kube/config` directamente
-  - ejecutando kubectl
-
-  ```bash
-  $ kubectl config set-context my-context --namespace=my-namespace
-  $ kubectl config use-context my-context
-  ```
-
-  - algunos comandos externos actualizan el archivo `$HOME/.kube/config`. ¡SEA CONSCIENTE DE ELLO!
-    - helm
-    - ranchercli
-    - gcloud
-    - doctl
-    - minikube
-    - az
-    - eksctl
-
-### Services
-
-### Pods
-
-### Ingress
-
-### ReplicaSets
-
-### Deployments
-
-### DaemonSets
-
-### Jobs
-
-### ConfigMaps
-
-### Secrets
+## Secrets
 
 [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
 
@@ -511,6 +413,76 @@ $ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}
 - [Kubernetes setup using ansible and vagrant](https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/)
 - [Ansible Galaxy](https://galaxy.ansible.com/geerlingguy/kubernetes)
 - [Openshift](https://github.com/openshift/openshift-ansible)
+
+## Cliente de Kubernetes
+
+```bash
+$ kubectl version
+$ kubectl get componentstatuses
+$ kubectl get nodes
+$ kubectl describe nodes node-1
+```
+
+::: notes
+
+Versiones
+
+- Mantenerse entre dos versiones menores de distancia
+- No usar nuevas características en clusters viejos
+
+Describe nodes
+
+- muestra información sobre
+  - nodo
+    - Os running
+    - architecture
+    - hostname
+  - operación
+    - Disk usage
+    - Memory Usage
+  - capacidad
+    - Total Memory
+    - Total CPU
+    - GPU info
+    - Pods
+  - Pods que corren actualmente
+
+:::
+
+## Namespaces
+
+- Organiza objetos en el cluster (como carpetas)
+  - si no se configura **kubectl** este interactúa por defecto con el namespace **defaut**
+
+```bash
+$ kubectl -n anothernamespace get pods
+$ kubectl --all-namespaces get pods
+```
+
+## Contexts
+
+- Cada contexto es un cluster de K8s diferente o un namespace de un cluster diferente
+
+- La lista de contextos y su configuración se guarda en el archivo `$HOME/.kube/config`
+
+- Se puede listar, crear, actualizar y borrarlos contextos de dos formas:
+
+  - actualizando el archivo `$HOME/.kube/config` directamente
+  - ejecutando kubectl
+
+  ```bash
+  $ kubectl config set-context my-context --namespace=my-namespace
+  $ kubectl config use-context my-context
+  ```
+
+  - algunos comandos externos actualizan el archivo `$HOME/.kube/config`. ¡SEA CONSCIENTE DE ELLO!
+    - helm
+    - ranchercli
+    - gcloud
+    - doctl
+    - minikube
+    - az
+    - eksctl
 
 ## Interactuar con Objetos del API de Kubernetes
 

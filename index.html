@@ -164,7 +164,8 @@
 </ul>
 <aside class="notes">
 <p>creo que a medida que k8s evolucione va a cubrir más y más los procesos de devops</p>
-</aside></section><section id="qué-cosas-no-hace-k8s" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
+<p>¿Qué cosas no hace K8s?</p>
+<ul>
 <li>No limita el tipo de aplicación</li>
 <li>No provee servicios de nivel de aplicación
 <ul>
@@ -172,23 +173,14 @@
 </ul></li>
 <li>No obliga a usar tecnologías específicas de monitoreo, logging o alerta</li>
 <li>No provee sistemas de configuración de máquinas, mantenimiento, administración o de auto curación.</li>
-</ul>
-<aside class="notes">
-<p>No obtiene código fuente ni construye aplicaciones</p>
+<li>No obtiene código fuente ni construye aplicaciones
 <ul>
 <li>aunque tecnologías como Tekton lo permiten</li>
-</ul>
-</aside></section><section id="qué-cosas-no-hace-k8s-1" class="title-slide slide level2"><h2>¿Qué cosas no hace K8s?</h2><ul>
-<li>No obtiene código fuente ni construye aplicaciones</li>
-<li>No obliga a usar un lenguaje específico</li>
-<li>No es un sistema de orquestración pues no tiene centro de control
-<ul>
-<li>poderozo</li>
-<li>robusto</li>
-<li>resiliente</li>
-<li>extensible</li>
 </ul></li>
-</ul></section></section>
+<li>No obliga a usar un lenguaje específico</li>
+<li>No es un sistema de orquestración pues no tiene centro de control</li>
+</ul>
+</aside></section></section>
 <section><section id="arquitectura-de-kubernetes" class="title-slide slide level1"><h1>Arquitectura de Kubernetes</h1></section><section id="ejemplo-de-usuarios-y-procesos" class="title-slide slide level2"><h2>Ejemplo de Usuarios y Procesos</h2><ul>
 <li><strong>operadores</strong>
 <ul>
@@ -294,78 +286,8 @@
 </ul>
 <p>Container Resource Monitoring</p>
 <p>Cluster Level Logging</p>
-</aside></section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2><pre class="bash"><code>$ kubectl version
-$ kubectl get componentstatuses</code></pre>
-<aside class="notes">
-<p>Versiones</p>
-<ul>
-<li>Mantenerse entre dos versiones menores de distancia</li>
-<li>No usar nuevas características en clusters viejos</li>
-</ul>
-<p>Estados de los componentes</p>
-<ul>
-<li><strong>controller manager</strong>: controladores regulan el comportamiento del cluster</li>
-<li><strong>scheduler</strong>: asocia diferentes pods en diferentes nodos del cluster</li>
-<li><strong>etcd</strong>: almacenamiento de todos los objetos del API</li>
-</ul>
-</aside></section><section id="nodos-worker" class="title-slide slide level3"><h3>Nodos Worker</h3><pre class="bash"><code>$ kubectl get nodes
-$ kubectl describe nodes node-1</code></pre>
-<aside class="notes">
-<ul>
-<li>muestra información sobre
-<ul>
-<li>nodo
-<ul>
-<li>Os running</li>
-<li>architecture</li>
-<li>hostname</li>
-</ul></li>
-<li>operación
-<ul>
-<li>Disk usage</li>
-<li>Memory Usage</li>
-</ul></li>
-<li>capacidad
-<ul>
-<li>Total Memory</li>
-<li>Total CPU</li>
-<li>GPU info</li>
-<li>Pods</li>
-</ul></li>
-<li>Pods que corren actualmente</li>
-</ul></li>
-</ul>
 </aside></section></section>
-<section><section id="algunos-recursos-del-api" class="title-slide slide level1"><h1>Algunos Recursos del API</h1></section><section id="recursos" class="title-slide slide level2"><h2>Recursos</h2></section><section id="namespaces" class="title-slide slide level3"><h3>Namespaces</h3><ul>
-<li>Organiza objetos en el cluster (como carpetas)
-<ul>
-<li>si no se configura <strong>kubectl</strong> este interactúa por defecto con el namespace <strong>defaut</strong></li>
-</ul></li>
-</ul>
-<pre class="bash"><code>$ kubectl -n anothernamespace get pods
-$ kubectl --all-namespaces get pods</code></pre></section><section id="contexts" class="title-slide slide level3"><h3>Contexts</h3><ul>
-<li><p>Cada contexto es un cluster de K8s diferente o un namespace de un cluster diferente</p></li>
-<li><p>La lista de contextos y su configuración se guarda en el archivo <code>$HOME/.kube/config</code></p></li>
-<li><p>Se puede listar, crear, actualizar y borrarlos contextos de dos formas:</p>
-<ul>
-<li>actualizando el archivo <code>$HOME/.kube/config</code> directamente</li>
-<li>ejecutando kubectl</li>
-</ul>
-<pre class="bash"><code>$ kubectl config set-context my-context --namespace=my-namespace
-$ kubectl config use-context my-context</code></pre>
-<ul>
-<li>algunos comandos externos actualizan el archivo <code>$HOME/.kube/config</code>. ¡SEA CONSCIENTE DE ELLO!
-<ul>
-<li>helm</li>
-<li>ranchercli</li>
-<li>gcloud</li>
-<li>doctl</li>
-<li>minikube</li>
-<li>az</li>
-<li>eksctl</li>
-</ul></li>
-</ul></li>
-</ul></section><section id="services" class="title-slide slide level3"><h3>Services</h3></section><section id="pods" class="title-slide slide level3"><h3>Pods</h3></section><section id="ingress" class="title-slide slide level3"><h3>Ingress</h3></section><section id="replicasets" class="title-slide slide level3"><h3>ReplicaSets</h3></section><section id="deployments" class="title-slide slide level3"><h3>Deployments</h3></section><section id="daemonsets" class="title-slide slide level3"><h3>DaemonSets</h3></section><section id="jobs" class="title-slide slide level3"><h3>Jobs</h3></section><section id="configmaps" class="title-slide slide level3"><h3>ConfigMaps</h3></section><section id="secrets" class="title-slide slide level3"><h3>Secrets</h3><p><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></p></section></section>
+<section><section id="algunos-recursos-del-api" class="title-slide slide level1"><h1>Algunos Recursos del API</h1></section><section id="services" class="title-slide slide level2"><h2>Services</h2></section><section id="pods" class="title-slide slide level2"><h2>Pods</h2></section><section id="ingress" class="title-slide slide level2"><h2>Ingress</h2></section><section id="replicasets" class="title-slide slide level2"><h2>ReplicaSets</h2></section><section id="deployments" class="title-slide slide level2"><h2>Deployments</h2></section><section id="daemonsets" class="title-slide slide level2"><h2>DaemonSets</h2></section><section id="jobs" class="title-slide slide level2"><h2>Jobs</h2></section><section id="configmaps" class="title-slide slide level2"><h2>ConfigMaps</h2></section><section id="secrets" class="title-slide slide level2"><h2>Secrets</h2><p><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></p></section></section>
 <section><section id="algunos-comandos" class="title-slide slide level1"><h1>Algunos Comandos</h1></section><section id="instalar-kubernetes" class="title-slide slide level2"><h2>Instalar Kubernetes</h2></section><section id="proveedor-de-nube" class="title-slide slide level3"><h3>Proveedor de Nube</h3></section><section id="gcp" class="slide level4">
 <h4>GCP</h4>
 <pre class="bash"><code>$ gcloud config set compute/zone us-west1-a
@@ -417,7 +339,71 @@ $ sudo k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}</code></pr
 <li><a href="https://galaxy.ansible.com/geerlingguy/kubernetes">Ansible Galaxy</a></li>
 <li><a href="https://github.com/openshift/openshift-ansible">Openshift</a></li>
 </ul>
-</section><section id="interactuar-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuar con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
+</section><section id="cliente-de-kubernetes" class="title-slide slide level2"><h2>Cliente de Kubernetes</h2><pre class="bash"><code>$ kubectl version
+$ kubectl get componentstatuses
+$ kubectl get nodes
+$ kubectl describe nodes node-1</code></pre>
+<aside class="notes">
+<p>Versiones</p>
+<ul>
+<li>Mantenerse entre dos versiones menores de distancia</li>
+<li>No usar nuevas características en clusters viejos</li>
+</ul>
+<p>Describe nodes</p>
+<ul>
+<li>muestra información sobre
+<ul>
+<li>nodo
+<ul>
+<li>Os running</li>
+<li>architecture</li>
+<li>hostname</li>
+</ul></li>
+<li>operación
+<ul>
+<li>Disk usage</li>
+<li>Memory Usage</li>
+</ul></li>
+<li>capacidad
+<ul>
+<li>Total Memory</li>
+<li>Total CPU</li>
+<li>GPU info</li>
+<li>Pods</li>
+</ul></li>
+<li>Pods que corren actualmente</li>
+</ul></li>
+</ul>
+</aside></section><section id="namespaces" class="title-slide slide level2"><h2>Namespaces</h2><ul>
+<li>Organiza objetos en el cluster (como carpetas)
+<ul>
+<li>si no se configura <strong>kubectl</strong> este interactúa por defecto con el namespace <strong>defaut</strong></li>
+</ul></li>
+</ul>
+<pre class="bash"><code>$ kubectl -n anothernamespace get pods
+$ kubectl --all-namespaces get pods</code></pre></section><section id="contexts" class="title-slide slide level2"><h2>Contexts</h2><ul>
+<li><p>Cada contexto es un cluster de K8s diferente o un namespace de un cluster diferente</p></li>
+<li><p>La lista de contextos y su configuración se guarda en el archivo <code>$HOME/.kube/config</code></p></li>
+<li><p>Se puede listar, crear, actualizar y borrarlos contextos de dos formas:</p>
+<ul>
+<li>actualizando el archivo <code>$HOME/.kube/config</code> directamente</li>
+<li>ejecutando kubectl</li>
+</ul>
+<pre class="bash"><code>$ kubectl config set-context my-context --namespace=my-namespace
+$ kubectl config use-context my-context</code></pre>
+<ul>
+<li>algunos comandos externos actualizan el archivo <code>$HOME/.kube/config</code>. ¡SEA CONSCIENTE DE ELLO!
+<ul>
+<li>helm</li>
+<li>ranchercli</li>
+<li>gcloud</li>
+<li>doctl</li>
+<li>minikube</li>
+<li>az</li>
+<li>eksctl</li>
+</ul></li>
+</ul></li>
+</ul></section><section id="interactuar-con-objetos-del-api-de-kubernetes" class="title-slide slide level2"><h2>Interactuar con Objetos del API de Kubernetes</h2></section><section id="describir-objetos-del-api" class="title-slide slide level3"><h3>Describir Objetos del API</h3><pre class="bash"><code>$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}
 $ kubectl describe &lt;resource-name&gt; &lt;obj-name&gt;</code></pre></section><section id="crear-actualizar-y-destruir-objetos-de-k8s" class="title-slide slide level3"><h3>Crear, Actualizar y Destruir Objetos de K8s</h3><pre class="bash"><code>$ kubectl apply -f obj.yaml
 $ vi obj.yaml # update some resources
 $ kubectl apply --dry-run -f obj.yaml # output the changes without making them
@@ -492,7 +478,7 @@ $ kubectl help | less</code></pre></section></section>
 </ul></section></section>
 <section><section id="bibliografía-y-recursos" class="title-slide slide level1"><h1>Bibliografía y Recursos</h1></section><section id="bibliografía" class="title-slide slide level2"><h2>Bibliografía</h2><ul>
 <li><em>Kubernetes: Up and running</em>, 2nd edition, by Brendan Burns, Joe Beda and Kelsey Hightower (O’Reilly).</li>
-</ul></section><section id="recursos-1" class="title-slide slide level2"><h2>Recursos</h2><ul>
+</ul></section><section id="recursos" class="title-slide slide level2"><h2>Recursos</h2><ul>
 <li><a href="https://kubernetes.io/docs/reference/">Kubernetes API Reference Documentation</a></li>
 <li><a href="https://www.youtube.com/watch?v=4ht22ReBjno">The Illustrated Children’s Guide to Kubernetes</a></li>
 <li><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></li>
