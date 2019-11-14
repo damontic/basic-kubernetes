@@ -52,7 +52,7 @@
 <li>Aprovisionamiento de Ambientes</li>
 <li>Seguridad</li>
 <li>Administración de la Configuración</li>
-</ul></section><section id="escenarios-diferentes" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img src="images/scenarios.svg" style="zoom:50%;" /></p>
+</ul></section><section id="escenarios-diferentes" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img data-src="images/container_evolution.svg" /></p></section><section id="escenarios-diferentes-1" class="title-slide slide level2"><h2>Escenarios Diferentes</h2><p><img src="images/scenarios.svg" style="zoom:50%;" /></p>
 <aside class="notes">
 <ul>
 <li><strong>Aplicaciones o Microservicios corriendo como Servicios del Sistema Operativo</strong> (Windows Services, init.d, upstart, systemctl)
@@ -100,9 +100,6 @@
 <li>El Ingeniero Fiabilidad del API de Orquestración de Contenedores se enfoca en entregar unos SLAs sobre el API sin preocuparse de las aplicaciones que corren encima de esta.</li>
 <li>Los ingenieros de fiabilidad del Sistema Operativo se enfocan en los SLAs de los individuales sistemas operativos instalados en cada máquina.</li>
 </ul></li>
-</ul>
-<p>Escalabilidad</p>
-<ul>
 <li>KaaS
 <ul>
 <li>Tectonic + Openshit</li>
@@ -124,7 +121,7 @@
 <li>Facilita encontrar el número óptimo de nodos usado al mismo tiempo por varios equipos</li>
 </ul>
 </aside></section></section>
-<section><section id="arquitectura-de-kubernetes" class="title-slide slide level1"><h1>Arquitectura de Kubernetes</h1></section><section id="desplegando-un-cluster" class="title-slide slide level2"><h2>Desplegando un cluster</h2></section><section id="proveedor-de-nube" class="title-slide slide level3"><h3>Proveedor de Nube</h3></section><section id="gcp" class="slide level4">
+<section><section id="arquitectura-de-kubernetes" class="title-slide slide level1"><h1>Arquitectura de Kubernetes</h1></section><section id="arquitectura" class="title-slide slide level2"><h2>Arquitectura</h2></section><section id="desplegando-un-cluster" class="title-slide slide level2"><h2>Desplegando un cluster</h2></section><section id="proveedor-de-nube" class="title-slide slide level3"><h3>Proveedor de Nube</h3></section><section id="gcp" class="slide level4">
 <h4>GCP</h4>
 <pre class="bash"><code>$ gcloud config set compute/zone us-west1-a
 $ gcloud container clusters create s4n-cluster
@@ -345,6 +342,7 @@ $ kubectl help | less</code></pre></section></section>
 <li><a href="https://www.youtube.com/watch?v=4ht22ReBjno">The Illustrated Children’s Guide to Kubernetes</a></li>
 <li><a href="https://www.youtube.com/watch?v=R9-SOzep73w">A Kubernetes story: Phippy goes to the zoo</a></li>
 <li><a href="https://www.cncf.io/phippy-goes-to-the-zoo-book/">CNCF: A Kubernetes story</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/">Kubernetes.io</a></li>
 </ul></section></section>
     </div>
   </div>

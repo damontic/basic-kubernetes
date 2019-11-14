@@ -28,6 +28,10 @@ author: David Alberto Montaño Fetecua
 
 ## Escenarios Diferentes
 
+![](images/container_evolution.svg)
+
+## Escenarios Diferentes
+
 <img src="images/scenarios.svg" style="zoom:50%;" />
 
 ::: notes
@@ -80,8 +84,6 @@ Escalabilidad (software y equipo)
   - El Ingeniero Fiabilidad del API de Orquestración de Contenedores se enfoca en entregar unos SLAs sobre el API sin preocuparse de las aplicaciones que corren encima de esta.
   - Los ingenieros de fiabilidad del Sistema Operativo se enfocan en los SLAs de los individuales sistemas operativos instalados en cada máquina.
 
-Escalabilidad
-
 - KaaS
   - Tectonic + Openshit
   - Rancher
@@ -101,6 +103,10 @@ Eficiencia
 :::
 
 # Arquitectura de Kubernetes
+
+## Arquitectura
+
+
 
 ## Desplegando un cluster
 
@@ -453,4 +459,4 @@ $ kubectl help | less
 - [The Illustrated Children's Guide to Kubernetes](https://www.youtube.com/watch?v=4ht22ReBjno)
 - [A Kubernetes story: Phippy goes to the zoo](https://www.youtube.com/watch?v=R9-SOzep73w)
 - [CNCF: A Kubernetes story](https://www.cncf.io/phippy-goes-to-the-zoo-book/)
-
+- [Kubernetes.io](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
