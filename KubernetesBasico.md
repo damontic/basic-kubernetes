@@ -521,6 +521,7 @@ Describe nodes
 
 - Organiza objetos en el cluster (como carpetas)
   - si no se configura **kubectl** este interactúa por defecto con el namespace **defaut**
+  - **kube-system**: namespace de componentes principales
 
 ```bash
 $ kubectl -n anothernamespace get pods
