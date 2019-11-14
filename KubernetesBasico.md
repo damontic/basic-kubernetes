@@ -49,8 +49,9 @@ author: David Alberto Montaño Fetecua
 
 <img src="images/originals/kubernetes.svg" style="zoom:50%;" />
 
-- ***Orquestrador de aplicaciones "containerizadas"***
+- ***Plataforma de administraicón de aplicaciones y servicios "containerizados"***
   - *código abierto*
+  - *configuración declarativa*
   - *automatiza procesos de despliegue*
   - *automatiza procesos de escalabilidad*
   - *facilita instalación y monitoreo de aplicaciones distribuidas*
@@ -104,9 +105,9 @@ Eficiencia
 
 # Arquitectura de Kubernetes
 
-## Arquitectura
+## Componentes
 
-
+![](images/components-of-kubernetes.png)
 
 ## Desplegando un cluster
 
