@@ -28,9 +28,9 @@ author: David Alberto Montaño Fetecua
 
 ## Escenarios Diferentes
 
-<img src="images/docker.svg" style="zoom:50%;" />
+<img src="images/originals/docker.svg" style="zoom:50%;" />
 
-<img src="images/rkt.svg" style="zoom:50%;" />
+<img src="images/originals/rkt.svg" style="zoom:50%;" />
 
 ::: notes
 
@@ -45,7 +45,7 @@ author: David Alberto Montaño Fetecua
 
 ## Kubernetes
 
-<img src="images/kubernetes.svg" style="zoom:50%;" />
+<img src="images/originals/kubernetes.svg" style="zoom:50%;" />
 
 - ***Orquestrador de aplicaciones "containerizadas"***
   - *código abierto*
