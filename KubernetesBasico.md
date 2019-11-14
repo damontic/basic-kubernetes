@@ -323,13 +323,13 @@ software responsable de correr contenedores
 
 ## [Componentes adicionales](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons)
 
-- Redes y Políticas de Red
+- **Redes y Políticas de Red**
   - Calico - Flannel - Canal - ...
-- Descubrimiento de Servicios
+- **Descubrimiento de Servicios**
   - CoreDNS
-- Control y Visualización
+- **Control y Visualización**
   - Dashboard
-- Infraestructura
+- **Infraestructura**
   - KubeVirt
 
 ::: notes
@@ -349,6 +349,12 @@ Los Containers que arrancan dentro de Kubernetes incluyen este servidor DNS en s
 **Web UI**
 
 administrar y entender problemas de aplicaciones que corren en el cluster y del mismo cluster
+
+**KubeVirt**
+
+Permite correr aplicaciones que no son fácilmente containerizables en máquinas virtuales
+
+Máquinas virtuales en k8s
 
 :::
 
