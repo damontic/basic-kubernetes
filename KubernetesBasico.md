@@ -400,6 +400,16 @@ Máquinas virtuales en k8s
 
 ![](https://www.cncf.io/wp-content/uploads/2019/07/diagram9.png)
 
+## Otros
+
+- ConfigMaps
+- Container
+- Replication Controller
+- Endpoints
+- EndpointSlice
+- Persistent Volume Claim
+- ... https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/
+
 # Algunos Comandos
 
 ## Instalar Kubernetes
